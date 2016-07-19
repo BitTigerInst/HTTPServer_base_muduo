@@ -1,0 +1,1204 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"timer",
+				"TimerQueue"
+			],
+			[
+				"func",
+				"functional	(Callbacks.h)"
+			],
+			[
+				"Eve",
+				"EventLoop	(Channel.h)"
+			],
+			[
+				"Timer",
+				"TimerQueue"
+			],
+			[
+				"expi",
+				"expired	(TimerQueue.h)"
+			],
+			[
+				"TimerLi",
+				"TimerList::iterator"
+			],
+			[
+				"timers",
+				"timers_	(TimerQueue.h)"
+			],
+			[
+				"tim",
+				"timerfd_"
+			],
+			[
+				"loo",
+				"loop_	(TimerQueue.h)"
+			],
+			[
+				"k",
+				"kMicroSecondsPerSecond	(Timestamp.h)"
+			],
+			[
+				"Tm",
+				"TMP_MAX	TMP_MAX"
+			],
+			[
+				"Time",
+				"Timer"
+			],
+			[
+				"Ti",
+				"TimerQueue	TimerQueue"
+			],
+			[
+				"Tim",
+				"TimerQueue"
+			],
+			[
+				"non",
+				"noncopyable.h"
+			],
+			[
+				"int",
+				"interval_	(Timer.h)"
+			],
+			[
+				"re",
+				"repeat_"
+			],
+			[
+				"exo",
+				"expiration_"
+			],
+			[
+				"inter",
+				"interval"
+			],
+			[
+				"in",
+				"inc	#include <…>"
+			],
+			[
+				"na",
+				"namespace	namespace name=namespace"
+			],
+			[
+				"update",
+				"updateChannel	(EventLoop.cc)"
+			],
+			[
+				"loop",
+				"loop_"
+			],
+			[
+				"it",
+				"it_value	struct timespec it_value"
+			],
+			[
+				"ena",
+				"enableReading	(Channel.h)"
+			],
+			[
+				"TFD",
+				"TFD_CLOEXEC	TFD_CLOEXEC"
+			],
+			[
+				"timerfd",
+				"timerfd_create	int timerfd_create(clockid_t __clock_id, int __flags)"
+			],
+			[
+				"Cha",
+				"Channel.h	(Channel.cc)"
+			],
+			[
+				"C",
+				"Channel.h	(Channel.cc)"
+			],
+			[
+				"Poller",
+				"Poller.h	(Poller.cc)"
+			],
+			[
+				"nam",
+				"name	Namespace"
+			],
+			[
+				"name",
+				"namespace"
+			],
+			[
+				"poll",
+				"poller_"
+			],
+			[
+				"comm",
+				"comm	Comment - Single-line block comment"
+			],
+			[
+				"owner",
+				"ownerLoop_	(Poller.h)"
+			],
+			[
+				"ow",
+				"ownerLoop_"
+			],
+			[
+				"assert",
+				"assertInLoopThread	(EventLoop.cc)"
+			],
+			[
+				"ase",
+				"assert.h	(EventLoop.cc)"
+			],
+			[
+				"Even",
+				"Eventloop"
+			],
+			[
+				"rev",
+				"revents_"
+			],
+			[
+				"read",
+				"readCallback_"
+			],
+			[
+				"Ev",
+				"EventCallback"
+			],
+			[
+				"jo",
+				"join	(Thread.h)"
+			],
+			[
+				"thre",
+				"threadFunc"
+			],
+			[
+				"get",
+				"getEventLoopOfCurrentThread	(EventLoop.h)"
+			],
+			[
+				"LOG_",
+				"LOG_TRACE	(Logging_test.cc)"
+			],
+			[
+				"E",
+				"EventLoop	(EventLoop.h)"
+			],
+			[
+				"i",
+				"ifnd	ifndef (…)"
+			],
+			[
+				"Logg",
+				"Logging_test"
+			],
+			[
+				"point",
+				"pointer"
+			],
+			[
+				"__",
+				"__p"
+			],
+			[
+				"__p",
+				"__ptr"
+			],
+			[
+				"type",
+				"typedef	(test.cpp)"
+			],
+			[
+				"publi",
+				"public	(test.cpp)"
+			],
+			[
+				"pri",
+				"private	(test.cpp)"
+			],
+			[
+				"err",
+				"errno"
+			],
+			[
+				"Epoll",
+				"Epoll_wait"
+			],
+			[
+				"sig",
+				"sigmask"
+			],
+			[
+				"parse",
+				"parse_request"
+			],
+			[
+				"b",
+				"buf"
+			],
+			[
+				"is_",
+				"is_static	(do_task.c)"
+			],
+			[
+				"str",
+				"strcmp"
+			],
+			[
+				"MAX",
+				"MAXLINE	(do_task.c)"
+			],
+			[
+				"close",
+				"close_conn"
+			],
+			[
+				"con",
+				"continue	(tiny_epoll_nonblock.c)"
+			],
+			[
+				"MAx",
+				"MAXBUF	(csapp.h)"
+			],
+			[
+				"reque",
+				"request_b"
+			],
+			[
+				"ev",
+				"event"
+			],
+			[
+				"request_",
+				"request_init"
+			],
+			[
+				"make",
+				"make_socket_non_blocking"
+			],
+			[
+				"requ",
+				"request_b"
+			],
+			[
+				"call",
+				"calloc	(csapp.c)"
+			],
+			[
+				"eve",
+				"events"
+			],
+			[
+				"do",
+				"do_task_nonblock.h	(do_task_nonblock.c)"
+			],
+			[
+				"ex",
+				"extern	(csapp.h)"
+			],
+			[
+				"cs",
+				"csapp.h	(csapp.c)"
+			],
+			[
+				"uni",
+				"unix_error	(do_task.c)"
+			],
+			[
+				"epoll",
+				"epoll_wait	(epoll_sample.c)"
+			],
+			[
+				"Epoll_",
+				"Epoll_ctl"
+			],
+			[
+				"Epo",
+				"epoll_ctl"
+			],
+			[
+				"com",
+				"comm-subsection	Comment - Subsection comment"
+			],
+			[
+				"unix",
+				"unix_error"
+			],
+			[
+				"app",
+				"app_error"
+			],
+			[
+				"F",
+				"F_GETFL	(epoll_sample.c)"
+			],
+			[
+				"auto",
+				"autocomplete	(CTags.sublime-settings)"
+			],
+			[
+				"Pthread_m",
+				"Pthread_mutex_unlock	(fdbuf_mutex.c)"
+			],
+			[
+				"fr",
+				"fprintf	fprintf …"
+			],
+			[
+				"Pthread",
+				"Pthread_mutex_unlock"
+			],
+			[
+				"nre",
+				"nready_mutex"
+			],
+			[
+				"fbuf",
+				"fdbuf_mutex.h	(fdbuf_mutex.c)"
+			],
+			[
+				"n",
+				"nready"
+			],
+			[
+				"buf",
+				"buf_mutex"
+			],
+			[
+				"Pth",
+				"Pthread_mutex_unlock"
+			],
+			[
+				"Pthread_mu",
+				"Pthread_mutex_lock"
+			],
+			[
+				"pthread_mu",
+				"pthread_mutex_t"
+			],
+			[
+				"pthread_m",
+				"Pthread_mutex_lock"
+			],
+			[
+				"nread",
+				"nready	(fdbuf_mutex.h)"
+			],
+			[
+				"pthr",
+				"pthread_t"
+			],
+			[
+				"fron",
+				"front	(fdbuf.h)"
+			],
+			[
+				"sbu",
+				"sbuft	(sbuf.h)"
+			],
+			[
+				"fdbu",
+				"fdbuf.h	(fdbuf.c)"
+			],
+			[
+				"Pthre",
+				"Pthread_create"
+			],
+			[
+				"S",
+				"SBUFSIZE"
+			],
+			[
+				"pth",
+				"pthread_self	(echoservert.c)"
+			],
+			[
+				"tota",
+				"total_time"
+			],
+			[
+				"te",
+				"temp_time"
+			],
+			[
+				"size",
+				"sizeof"
+			],
+			[
+				"IN",
+				"INFTIM	(tiny_poll.c)"
+			],
+			[
+				"cli",
+				"clientlen"
+			],
+			[
+				"ti",
+				"timeout"
+			],
+			[
+				"stru",
+				"struct"
+			],
+			[
+				"Bi",
+				"BILLION"
+			],
+			[
+				"cih",
+				"child_total_time"
+			],
+			[
+				"chil",
+				"child_total_time"
+			],
+			[
+				"chi",
+				"child_total_time"
+			],
+			[
+				"pip",
+				"pipefd"
+			],
+			[
+				"total",
+				"totaltime"
+			],
+			[
+				"ver",
+				"verbose"
+			],
+			[
+				"rece",
+				"receive_buf"
+			],
+			[
+				"Rio",
+				"Rio_readlineb(&rio,param_buf,MAXLINE	(do_task.c)"
+			],
+			[
+				"Open",
+				"Open_clientfd	(csapp.h)"
+			],
+			[
+				"FOR",
+				"Fork	(do_task.c)"
+			],
+			[
+				"csa",
+				"csapp.h	(do_task.h)"
+			],
+			[
+				"sig_",
+				"sigchld_hander	(do_task.h)"
+			],
+			[
+				"conne",
+				"connection	(csapp.c)"
+			],
+			[
+				"do_",
+				"do_task.h	(do_task.c)"
+			],
+			[
+				"FD_SET",
+				"FD_SETSIZE"
+			],
+			[
+				"max",
+				"maxi      - [#int#]maxi"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "net/TimerId.h",
+			"settings":
+			{
+				"buffer_size": 509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Channel.h",
+			"settings":
+			{
+				"buffer_size": 1796,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Timer.h",
+			"settings":
+			{
+				"buffer_size": 778,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Timer.cc",
+			"settings":
+			{
+				"buffer_size": 229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TimerQueue.cc",
+			"settings":
+			{
+				"buffer_size": 4596,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TimerQueue.h",
+			"settings":
+			{
+				"buffer_size": 1425,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/test/test04.cc",
+			"settings":
+			{
+				"buffer_size": 880,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/EventLoop.cc",
+			"settings":
+			{
+				"buffer_size": 2303,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/EventLoop.h",
+			"settings":
+			{
+				"buffer_size": 1714,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 38.0,
+		"last_filter": "Package Control: up",
+		"selected_items":
+		[
+			[
+				"Package Control: up",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: li",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"clang",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 476.0
+	},
+	"console":
+	{
+		"height": 195.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test"
+	],
+	"file_history":
+	[
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/ThreadPool.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Timestamp.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test03.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Callbacks.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/CurrentThread.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/Makefile",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Makefile",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/EasyClangComplete.sublime-settings",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/noncopyable.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/noncopyable.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Eventloop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/tests/Makefile",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Makefile",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/tests/Logging_test.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/LogFile.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/common.mk",
+		"/home/xibaohe/ServerCode/testc++/test.cpp",
+		"/home/xibaohe/ServerCode/Tiny/README.md",
+		"/home/xibaohe/ServerCode/Tiny/common/csapp.c",
+		"/home/xibaohe/ServerCode/Tiny/Tiny_process/sbuf.h",
+		"/home/xibaohe/ServerCode/Tiny/Tiny_process/src/do_task.c",
+		"/home/xibaohe/ServerCode/Tiny/common/csapp.h",
+		"/home/xibaohe/ServerCode/Tiny/Tiny_process/tiny_select",
+		"/home/xibaohe/.config/sublime-text-3/Packages/C++ Snippets/README.md",
+		"/home/xibaohe/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Clang Format/Default (Linux).sublime-keymap",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Clang Format/clang_format.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/clang_format_custom.sublime-settings",
+		"/home/xibaohe/csapp/Tiny/.clang_complete",
+		"/home/xibaohe/csapp/Tiny/common/);",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/do_task.c",
+		"/home/xibaohe/csapp/Tiny/common/csapp.h",
+		"/home/xibaohe/csapp/Tiny/common/csapp.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/do_task_nonblock.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/include/do_task.h",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_poll.c",
+		"/home/xibaohe/csapp/Tiny/test_client/epoll_sample.c",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Terminal/Default (Linux).sublime-keymap",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Terminal/Terminal.sublime-settings",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_pre2.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_epoll_nonblock.c",
+		"/home/xibaohe/.config/sublime-text-3/Packages/CTags/Default.sublime-keymap",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/tiny_poll",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_select.c",
+		"/home/xibaohe/csapp/Tiny/test_client/test_client.c",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/CTags.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/CTags/CTags.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/EasyClangComplete/EasyClangComplete.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/fdbuf.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_pre.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/include/fdbuf.h",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/sbuf.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_pre_mutex.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/fdbuf_mutex.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/include/fdbuf_mutex.h",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/echoservert.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/echoservert_pre.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/sbuf.h",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_dy.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_dy",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_process_pre.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_process.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_iter.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/echoservers.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/Makefile",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/cgi-bin/adder.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/tiny_select.c",
+		"/home/xibaohe/csapp/Tiny/Tiny_process/tiny.c",
+		"/home/xibaohe/.config/sublime-text-3/Packages/ClangAutoComplete/ClangAutoComplete.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/xibaohe/csapp/code/netp/tiny/cgi-bin/adder.c",
+		"/home/xibaohe/csapp/code/netp/tiny/add.html",
+		"/home/xibaohe/csapp/code/netp/tiny/tiny.c",
+		"/home/xibaohe/csapp/code/include/csapp.h",
+		"/home/xibaohe/csapp/code/src/csapp.c",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Clang Format/clang_format_custom.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/ClangAutoComplete.sublime-settings",
+		"/home/xibaohe/.config/sublime-text-3/Packages/C99/messages/install.txt",
+		"/home/xibaohe/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"loop",
+			"boost",
+			"typedef",
+			"shared_ptr",
+			"\n#",
+			"Eventloop",
+			"()''",
+			"MUDUO_CHANNEL_H",
+			"MUDUO_EVENT_LOOP_H",
+			"muduo",
+			"Eventloop",
+			"p",
+			"allocate_shared",
+			"count",
+			");\n",
+			"__u",
+			"swap",
+			"pointer()",
+			"fd",
+			"rio",
+			"rb",
+			"extern",
+			"SYMBOL",
+			"open_cli",
+			"P",
+			"select",
+			"}\n",
+			"printf",
+			"pool",
+			"nready",
+			"P"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"std",
+			"EventLoop",
+			"client_pool"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 6,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "net/TimerId.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								463,
+								463
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "net/Channel.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1796,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1526,
+								1526
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "net/Timer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 778,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								596,
+								596
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "net/Timer.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								86,
+								86
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "net/TimerQueue.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4596,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3202,
+								3202
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3226.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "net/TimerQueue.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1425,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1271,
+								1271
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "net/test/test04.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 880,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								636,
+								636
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "net/EventLoop.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2303,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1913,
+								1913
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1020.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "net/EventLoop.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1714,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								879,
+								879
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "muduo_11.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"Tiny_process/sbuf.c"
+			],
+			[
+				"tiny_thred",
+				"Tiny_process/src/tiny_thread_pre.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 167.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
