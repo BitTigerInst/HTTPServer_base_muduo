@@ -5,6 +5,7 @@
 #include <muduo/base/noncopyable.h>
 #include <muduo/net/Callbacks.h>
 #include <muduo/net/TimerId.h>
+#include <muduo/base/Mutex.h>
 #include <memory>
 
 namespace muduo {
@@ -17,13 +18,30 @@ class TimerQueue;
 
 class EventLoop :noncopyable{
 public:
+  typedef std::function<void()> Functor;
   
   EventLoop();
   ~EventLoop();
 
+  ///
+  /// Loops forever.
+  ///
+  /// Must be called in the same thread as creation of the object.
+  ///
   void loop();
 
   void quit();
+
+  /// Runs callback immediately in the loop thread.
+  /// It wakes up the loop, and run the cb.
+  /// If in the same loop thread, cb is run within the function.
+  /// Safe to call from other threads.
+  void runInLoop(Functor&& cb);
+  /// Queues callback in the loop thread.
+  /// Runs after finish pooling.
+  /// Safe to call from other threads.
+  void queueInLoop(Functor&& cb);
+  //^^ rvalue cannot use const
 
   ///
   /// Runs callback at 'time'.
@@ -43,35 +61,46 @@ public:
 
 
   // internal use only
+  void wakeup();
   void updateChannel(Channel* channel);
   // void removeChannel(Channel* channel);
 
   void assertInLoopThread() {
-    if (!isInloopThread()) {
+    if (!isInLoopThread()) {
       abortNotInLoopThread();
     }
   }
 
-  bool isInloopThread() const 
+  bool isInLoopThread() const 
   { return threadId_ == CurrentThread::tid(); }
 
   static EventLoop* getEventLoopOfCurrentThread();
 
  private:
-  // EventLoop(const EventLoop&) = delete;
-  // EventLoop& operator=(const EventLoop&) = delete;
-
   void abortNotInLoopThread();
+  void handleRead();
+  void doPendingFunctors();
+
+
   typedef std::vector<Channel*> ChannelList;
   bool looping_;/* atomic */
   bool quit_;/* atomic */
+  bool callingPendingFunctors_;  /*atomic*/
   const pid_t threadId_;
+
+  int wakeupFd_;
   
   //use const to avoid swap
   //http://stackoverflow.com/questions/30143413/changing-boostscoped-ptr-to-stdunique-ptr
   const std::unique_ptr<Poller> poller_;
   const std::unique_ptr<TimerQueue> timerQueue_;
   ChannelList activeChannels_;
+
+  // unlike in TimerQueue, which is an internal class,
+  // we don't expose Channel to client.
+  const std::unique_ptr<Channel> wakeupChannel_;
+  MutexLock mutex_;
+  std::vector<Functor> pendingFunctors_; // @GuardedBy mutex_
 };
 
 

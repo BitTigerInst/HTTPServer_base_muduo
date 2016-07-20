@@ -41,6 +41,8 @@ class TimerQueue : noncopyable {
   typedef std::pair<Timestamp, TimerPtr> Entry;
   typedef std::set<Entry> TimerList;
 
+  void addTimerInLoop(TimerPtr timer);
+
   // called when timerfd alarms
   void handleRead();
   // move out all expired timers

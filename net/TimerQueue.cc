@@ -95,18 +95,25 @@ TimerId TimerQueue::addTimer(const TimerCallback&& cb,
 							 double interval)
 {
 	TimerPtr timer(new Timer(std::move(cb),when,interval));
-	loop_->assertInLoopThread();
-	bool earliestChanged = insert(timer);
-
-	if(earliestChanged)
-	{
-    //if the timer to add is the earliest to be triggerd,
-    //then modify the current trigger time
-		resetTimerfd(timerfd_,timer->expiration());
-	}
-
+	loop_->runInLoop(
+      std::bind(&TimerQueue::addTimerInLoop,this,timer));
 	return TimerId(timer);
 }
+void TimerQueue::addTimerInLoop(TimerPtr timer)
+{
+  loop_->assertInLoopThread();
+  bool earliestChanged = insert(timer);
+
+  if(earliestChanged)
+  {
+    //if the timer to add is the earliest to be triggerd,
+    //then modify the current trigger time
+    resetTimerfd(timerfd_,timer->expiration());
+  }
+
+}
+
+
 
 void TimerQueue::handleRead()
 {
