@@ -75,6 +75,7 @@ void EventLoop::loop() {
     {
       (*it)->handleEvent();
     }
+    //why this cannot put in handleRead?
     doPendingFunctors();
   }
 

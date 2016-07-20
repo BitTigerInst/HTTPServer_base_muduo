@@ -1,0 +1,4 @@
+main(): pid = 6944, tid = 6944
+runInThread(): pid = 6944, tid = 6945
+runInThread(): pid = 6944, tid = 6945
+exit main().
