@@ -4,6 +4,7 @@
 
 #include <muduo/net/InetAddress.h>
 #include <muduo/net/SocketsOps.h>
+#include <muduo/base/Logging.h>
 
 #include <netinet/in.h>
 #include <netinet/tcp.h>
@@ -12,10 +13,33 @@
 using namespace muduo;
 using namespace muduo::net;
 
+
+
+
+
 Socket::~Socket()
 {
-  sockets::close(sockfd_);
+  LOG_INFO << "close Socket " << sockfd_ ;
+  if(sockfd_!=-1){
+    sockets::close(sockfd_);
+  }
 }
+
+Socket::Socket(Socket&& sourcefd)
+{
+  LOG_TRACE << "move cpy Socket " << sockfd_ ;
+  sockfd_ = sourcefd.sockfd_;
+  sourcefd.sockfd_ = -1;
+}
+Socket& Socket:: operator=(Socket&& sourcefd)
+{
+  LOG_TRACE << "move assgin Socket " << sockfd_ ;
+  sockfd_ = sourcefd.sockfd_;
+  sourcefd.sockfd_ = -1;
+  return *this;
+}
+
+
 
 void Socket::bindAddress(const InetAddress& addr)
 {

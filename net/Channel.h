@@ -21,11 +21,17 @@ class Channel : noncopyable {
   typedef std::function<void()> EventCallback;
 
   Channel(EventLoop* loop, int fd);
+  ~Channel();
 
   void handleEvent();
-  void setReadCallback(const EventCallback&& cb) { readCallback_ = std::move(cb); }
-  void setWriteCallback(const EventCallback&& cb) { writeCallback_ = std::move(cb); }
-  void setErrorCallback(const EventCallback&& cb) { errorCallback_ = std::move(cb); }
+  void setReadCallback(const EventCallback&& cb) 
+  { readCallback_ = std::move(cb); }
+  void setWriteCallback(const EventCallback&& cb) 
+  { writeCallback_ = std::move(cb); }
+  void setErrorCallback(const EventCallback&& cb) 
+  { errorCallback_ = std::move(cb); }
+  void setCloseCallback(const EventCallback&& cb)
+  { closeCallback_ = std::move(cb); }
 
   int fd() const { return fd_; }
   int events() const { return events_; }
@@ -38,7 +44,7 @@ class Channel : noncopyable {
   }
   // void enableWriting() { events_ |= kWriteEvent; update(); }
   // void disableWriting() { events_ &= ~kWriteEvent; update(); }
-  // void disableAll() { events_ = kNoneEvent; update(); }
+   void disableAll() { events_ = kNoneEvent; update(); }
 
   // for Poller
   int index() { return index_; }
@@ -47,9 +53,6 @@ class Channel : noncopyable {
   EventLoop* ownerLoop() { return loop_; }
 
  private:
-  // // noncopyable
-  // Channel(const Channel&) = delete;
-  // Channel& operator=(const Channel&) = delete;
 
   void update();
 
@@ -62,10 +65,14 @@ class Channel : noncopyable {
   int events_;
   int revents_;
   int index_;
+  
+  bool eventHandling_;
+  
 
   EventCallback readCallback_;
   EventCallback writeCallback_;
   EventCallback errorCallback_;
+  EventCallback closeCallback_;
 };
 
 }  // net

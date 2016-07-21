@@ -38,11 +38,11 @@ void Acceptor::handleRead()
   //FIXME loop until no more
   int connfd = acceptSocket_.accept(&peerAddr);//accept
   //accept three stratiges
+  //TODO:  use RAII Sockets
   if (connfd >= 0) {
+    Socket sockfd(connfd);//transter value
     if (newConnectionCallback_) {
-      newConnectionCallback_(connfd, peerAddr);
-    } else {
-      sockets::close(connfd);
-    }
+      newConnectionCallback_(std::move(sockfd), peerAddr);
+    } 
   }
 }

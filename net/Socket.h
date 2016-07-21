@@ -23,7 +23,7 @@ class Socket : noncopyable
     : sockfd_(sockfd)
   { }
 
-  ~Socket();
+  ~Socket();//destructor cancel the implicit move constructor
 
   int fd() const { return sockfd_; }
 
@@ -38,13 +38,19 @@ class Socket : noncopyable
   /// On error, -1 is returned, and *peeraddr is untouched.
   int accept(InetAddress* peeraddr);
 
+  Socket(Socket&& sourcefd);
+  
+  Socket& operator=(Socket&& sourcefd);
+
+
   ///
   /// Enable/disable SO_REUSEADDR
   ///
   void setReuseAddr(bool on);
 
+
  private:
-  const int sockfd_;
+  int sockfd_;
 };
 
 

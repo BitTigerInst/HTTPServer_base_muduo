@@ -32,6 +32,10 @@ class Poller : noncopyable {
   /// Must be called in the loop thread.
   void updateChannel(Channel* channel);
 
+  /// Remove the channel, when it destructs.
+  /// Must be called in the loop thread.
+  void removeChannel(Channel* channel);
+
   void assertInLoopThread() { ownerLoop_->assertInLoopThread(); }
 
  private:

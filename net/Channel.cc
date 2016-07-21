@@ -14,7 +14,21 @@ const int Channel::kReadEvent = POLLIN | POLLPRI;
 const int Channel::kWriteEvent = POLLOUT;
 
 Channel::Channel(EventLoop* loop, int fdArg)
-    : loop_(loop), fd_(fdArg), events_(0), revents_(0), index_(-1) {}
+    : loop_(loop),
+      fd_(fdArg),
+      events_(0),
+      revents_(0),
+      index_(-1),
+      eventHandling_(false) {}
+
+Channel::~Channel() {
+  // to prevent dtor
+
+  LOG_DEBUG << "Channel Close" ;
+  //what will happen if handleEvent not done,but Channel is destroyed???
+  assert(!eventHandling_);
+  
+}
 
 void Channel::update() {
   // update_channel
@@ -22,8 +36,19 @@ void Channel::update() {
 }
 
 void Channel::handleEvent() {
+  LOG_DEBUG << "POLLRDHUP " << (revents_ & POLLRDHUP) << " " << fd_;
+  LOG_DEBUG << "POLLPRI " << (revents_ & POLLPRI);
+  LOG_DEBUG << "POLLIN " << (revents_ & POLLIN);
+  LOG_DEBUG << "POLLHUP " << (revents_ & POLLHUP);
+  eventHandling_ = true;
+
   if (revents_ & POLLNVAL) {
     LOG_WARN << "Channel::handle_event() POLLNVAL";
+  }
+
+  if ((revents_ & POLLHUP) && !(revents_ & POLLIN)) {
+    LOG_WARN << "Channel::handle_event() POLLHUP";
+    if (closeCallback_) closeCallback_();
   }
 
   if (revents_ & (POLLERR | POLLNVAL)) {
@@ -35,4 +60,6 @@ void Channel::handleEvent() {
   if (revents_ & POLLOUT) {
     if (writeCallback_) writeCallback_();
   }
+
+  eventHandling_ = false;
 }
