@@ -49,6 +49,9 @@ class Socket : noncopyable
   void setReuseAddr(bool on);
 
 
+  void shutdownWrite();
+
+
  private:
   int sockfd_;
 };

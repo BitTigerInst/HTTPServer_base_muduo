@@ -3,6 +3,7 @@
 #define MUDUO_NET_TCPCONNECTION_H
 
 #include <muduo/base/noncopyable.h>
+#include <muduo/net/Buffer.h>
 #include <muduo/net/Callbacks.h>
 #include <muduo/net/InetAddress.h>
 #include <muduo/net/Socket.h>
@@ -34,36 +35,43 @@ class TcpConnection : noncopyable,
   const InetAddress& peerAddress() { return peerAddr_; }
   bool connected() const { return state_ == kConnected; }
 
-  //cannot use rvalue
+  // void send(const void* message, size_t len);
+  // Thread safe.
+  void send(const std::string& message);
+  // Thread safe.
+  void shutdown();
+
+  // cannot use rvalue
   void setConnectionCallback(const ConnectionCallback& cb) {
     connectionCallback_ = cb;
   }
 
-  void setMessageCallback(const MessageCallback& cb) 
-  { messageCallback_ = cb; }
+  void setMessageCallback(const MessageCallback& cb) { messageCallback_ = cb; }
 
   /// Internal use only.
-  void setCloseCallback(const CloseCallback& cb)
-   { closeCallback_ = cb; }
+  void setCloseCallback(const CloseCallback& cb) { closeCallback_ = cb; }
 
   // called when TcpServer accepts a new connection
   void connectEstablished();  // should be called only once
 
-   // called when TcpServer has removed me from its map
+  // called when TcpServer has removed me from its map
   void connectDestroyed();  // should be called only once
 
  private:
   enum StateE {
     kConnecting,
     kConnected,
-    kDisconnected
+    kDisconnecting,
+    kDisconnected,
   };
 
   void setState(StateE s) { state_ = s; }
-  void handleRead();
+  void handleRead(Timestamp receiveTime);
   void handleWrite();
   void handleClose();
   void handleError();
+  void sendInLoop(const std::string& message);
+  void shutdownInLoop();
 
   EventLoop* loop_;
   std::string name_;
@@ -77,6 +85,9 @@ class TcpConnection : noncopyable,
   ConnectionCallback connectionCallback_;
   MessageCallback messageCallback_;
   CloseCallback closeCallback_;
+
+  Buffer inputBuffer_;
+  Buffer outputBuffer_;
 };
 
 typedef std::shared_ptr<TcpConnection> TcpConnectionPtr;

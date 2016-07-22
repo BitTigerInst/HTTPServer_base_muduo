@@ -8,14 +8,15 @@
 
 muduo::net::EventLoop* g_loop;
 
-void timeout()
+void timeout(muduo::Timestamp receiveTime)
 {
-	printf("Timeout!\n");
-	g_loop->quit();
+  printf("%s Timeout!\n", receiveTime.toFormattedString().c_str());
+  g_loop->quit();
 }
 
 int main()
 {
+	printf("%s started\n", muduo::Timestamp::now().toFormattedString().c_str());
 	muduo::net::EventLoop loop;
 	g_loop = &loop;
 

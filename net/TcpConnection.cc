@@ -11,6 +11,7 @@
 
 using namespace muduo;
 using namespace muduo::net;
+using namespace std::placeholders;
 
 TcpConnection::TcpConnection(EventLoop* loop, const std::string& nameArg,
                              Socket&& sockfd, const InetAddress& localAddr,
@@ -25,7 +26,7 @@ TcpConnection::TcpConnection(EventLoop* loop, const std::string& nameArg,
   LOG_DEBUG << "TcpConnection::ctor[" << name_ << "] at " << this
             << " fd=" << socket_.fd();
   channel_->setReadCallback(
-    std::bind(&TcpConnection::handleRead, this));
+    std::bind(&TcpConnection::handleRead, this,_1));
   channel_->setWriteCallback(
     std::bind(&TcpConnection::handleWrite, this));
   channel_->setCloseCallback(
@@ -39,6 +40,71 @@ TcpConnection::~TcpConnection() {
             << " fd=" << channel_->fd();
 }
 
+
+void TcpConnection::send(const std::string& message)
+{
+  if (state_ == kConnected) {
+    if (loop_->isInLoopThread()) {
+      sendInLoop(message);
+    } else {
+      //bind will copy the string,  ref avoid copy, but  thread safe???
+      loop_->runInLoop(
+          std::bind(&TcpConnection::sendInLoop, this, std::ref(message)));
+    }
+  }
+}
+
+void TcpConnection::sendInLoop(const std::string& message)
+{
+  loop_->assertInLoopThread();
+  ssize_t nwrote = 0;
+  // if no thing in output queue, try writing directly
+  if (!channel_->isWriting() && outputBuffer_.readableBytes() == 0) {
+    nwrote = ::write(channel_->fd(), message.data(), message.size());
+    if (nwrote >= 0) {
+      if (implicit_cast<size_t>(nwrote) < message.size()) {
+        LOG_TRACE << "I am going to write more data";
+      }
+    } else {
+      nwrote = 0;
+      if (errno != EWOULDBLOCK) {
+        LOG_SYSERR << "TcpConnection::sendInLoop";
+      }
+    }
+  }
+
+  assert(nwrote >= 0);
+  if (implicit_cast<size_t>(nwrote) < message.size()) {
+    outputBuffer_.append(message.data()+nwrote, message.size()-nwrote);
+    if (!channel_->isWriting()) {
+      channel_->enableWriting();
+    }
+  }
+}
+
+void TcpConnection::shutdown()
+{
+  // FIXME: use compare and swap
+  if (state_ == kConnected)
+  {
+    setState(kDisconnecting);
+    // FIXME: shared_from_this()?
+    loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
+  }
+}
+
+void TcpConnection::shutdownInLoop()
+{
+  loop_->assertInLoopThread();
+  if (!channel_->isWriting())
+  {
+    // we are not writing
+    socket_.shutdownWrite();
+  }
+}
+
+
+
 void TcpConnection::connectEstablished() {
   loop_->assertInLoopThread();
   assert(state_ == kConnecting);
@@ -51,7 +117,7 @@ void TcpConnection::connectEstablished() {
 void TcpConnection::connectDestroyed()
 {
   loop_->assertInLoopThread();
-  assert(state_ == kConnected);
+  assert(state_ == kConnected || state_ == kDisconnecting);
   setState(kDisconnected);
   channel_->disableAll();
   connectionCallback_(shared_from_this());
@@ -61,26 +127,51 @@ void TcpConnection::connectDestroyed()
 
 
 
-void TcpConnection::handleRead() {
-  char buf[65536];
-  ssize_t n = ::read(channel_->fd(), buf, sizeof buf);
-  messageCallback_(shared_from_this(), buf, n);
-  // FIXME: close connection if n == 0
+void TcpConnection::handleRead(Timestamp receiveTime)
+{
+  int savedErrno = 0;
+  ssize_t n = inputBuffer_.readFd(channel_->fd(), &savedErrno);
   if (n > 0) {
-    messageCallback_(shared_from_this(), buf, n);
+    messageCallback_(shared_from_this(), &inputBuffer_, receiveTime);
   } else if (n == 0) {
     handleClose();
   } else {
+    errno = savedErrno;
+    LOG_SYSERR << "TcpConnection::handleRead";
     handleError();
   }
 }
 
-void TcpConnection::handleWrite() {}
+void TcpConnection::handleWrite()
+{
+  loop_->assertInLoopThread();
+  if (channel_->isWriting()) {
+    ssize_t n = ::write(channel_->fd(),
+                        outputBuffer_.peek(),
+                        outputBuffer_.readableBytes());
+    if (n > 0) {
+      outputBuffer_.retrieve(n);
+      if (outputBuffer_.readableBytes() == 0) {
+        channel_->disableWriting();
+        if (state_ == kDisconnecting) {
+          shutdownInLoop();
+        }
+      } else {
+        LOG_TRACE << "I am going to write more data";
+      }
+    } else {
+      LOG_SYSERR << "TcpConnection::handleWrite";
+    }
+  } else {
+    LOG_TRACE << "Connection is down, no more writing";
+  }
+}
+
 
 void TcpConnection::handleClose() {
   loop_->assertInLoopThread();
   LOG_TRACE << "TcpConnection::handleClose state = " << state_;
-  assert(state_ == kConnected);
+  assert(state_ == kConnected || state_ == kDisconnecting);
   // we don't close fd, leave it to dtor, so we can find leaks easily.
   channel_->disableAll();
   // must be the last line

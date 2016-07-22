@@ -4,6 +4,7 @@
 #include <muduo/net/Channel.h>
 #include <muduo/base/Logging.h>
 #include <muduo/net/TimerQueue.h>
+#include <muduo/base/Timestamp.h>
 #include <sys/eventfd.h>
 
 #include <assert.h>
@@ -60,28 +61,29 @@ EventLoop* EventLoop::getEventLoopOfCurrentThread() {
   return t_loopInThisThread;
 }
 
-void EventLoop::loop() {
+void EventLoop::loop()
+{
   assert(!looping_);
   assertInLoopThread();
   looping_ = true;
   quit_ = false;
 
-  while(!quit_)
+  while (!quit_)
   {
     activeChannels_.clear();
-    poller_->poll(kPollTimeMs,&activeChannels_);
-    for(ChannelList::iterator it = activeChannels_.begin();
-      it!= activeChannels_.end();++it)
+    pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
+    for (ChannelList::iterator it = activeChannels_.begin();
+        it != activeChannels_.end(); ++it)
     {
-      (*it)->handleEvent();
+      (*it)->handleEvent(pollReturnTime_);
     }
-    //why this cannot put in handleRead?
     doPendingFunctors();
   }
 
   LOG_TRACE << "EventLoop " << this << " stop looping";
   looping_ = false;
 }
+
 void EventLoop::quit()
 {
   quit_ = true;

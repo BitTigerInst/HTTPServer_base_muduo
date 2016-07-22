@@ -12,6 +12,7 @@
 
 using namespace muduo;
 using namespace muduo::net;
+using namespace std::placeholders;
 
 TcpServer::TcpServer(EventLoop* loop, const InetAddress& listenAddr)
   : loop_(CHECK_NOTNULL(loop)),
@@ -22,8 +23,7 @@ TcpServer::TcpServer(EventLoop* loop, const InetAddress& listenAddr)
 {
   acceptor_->setNewConnectionCallback(
       std::bind(&TcpServer::newConnection, 
-                this, std::placeholders::_1, 
-                      std::placeholders::_2));
+                this, _1, _2));
 }
 
 TcpServer::~TcpServer()
@@ -66,7 +66,7 @@ void TcpServer::newConnection(Socket&& sockfd, const InetAddress& peerAddr)
   conn->setConnectionCallback(connectionCallback_);
   conn->setMessageCallback(messageCallback_);
   conn->setCloseCallback(
-      std::bind(&TcpServer::removeConnection,this,std::placeholders::_1));
+      std::bind(&TcpServer::removeConnection,this,_1));
   conn->connectEstablished();
 } 
 

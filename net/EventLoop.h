@@ -6,7 +6,9 @@
 #include <muduo/net/Callbacks.h>
 #include <muduo/net/TimerId.h>
 #include <muduo/base/Mutex.h>
+#include <muduo/base/Timestamp.h>
 #include <memory>
+
 
 namespace muduo {
 namespace net {
@@ -31,6 +33,11 @@ public:
   void loop();
 
   void quit();
+
+  ///
+  /// Time when poll returns, usually means data arrivial.
+  ///
+  Timestamp pollReturnTime() const { return pollReturnTime_; }
 
   /// Runs callback immediately in the loop thread.
   /// It wakes up the loop, and run the cb.
@@ -87,7 +94,7 @@ public:
   bool quit_;/* atomic */
   bool callingPendingFunctors_;  /*atomic*/
   const pid_t threadId_;
-
+  Timestamp pollReturnTime_;
   int wakeupFd_;
   
   //use const to avoid swap
