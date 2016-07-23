@@ -78,7 +78,7 @@ class TcpConnection : noncopyable,
   StateE state_;  // FIXME: use atomic variable
   // we don't expose those classes to client.
   // std::unique_ptr<Socket> socket_;
-  const Socket socket_;
+  Socket socket_;//not to use const since we will close socket
   const std::unique_ptr<Channel> channel_;
   InetAddress localAddr_;
   InetAddress peerAddr_;
