@@ -19,7 +19,7 @@ using namespace muduo::net;
 
 Socket::~Socket()
 {
-  LOG_INFO << "close Socket " << sockfd_ ;
+  LOG_DEBUG << "close Socket " << sockfd_ ;
   if(sockfd_!=-1){
     sockets::close(sockfd_);
   }
@@ -76,3 +76,11 @@ void Socket::shutdownWrite()
   sockets::shutdownWrite(sockfd_);
 }
 
+
+void Socket::setTcpNoDelay(bool on)
+{
+  int optval = on ? 1 : 0;
+  ::setsockopt(sockfd_, IPPROTO_TCP, TCP_NODELAY,
+               &optval, sizeof optval);
+  // FIXME CHECK
+}

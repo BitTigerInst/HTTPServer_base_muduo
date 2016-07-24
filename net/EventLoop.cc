@@ -9,6 +9,7 @@
 
 #include <assert.h>
 #include <poll.h>
+#include <signal.h>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -27,6 +28,17 @@ static int createEventfd()
   }
   return evtfd;
 }
+
+class IgnoreSigPipe
+{
+ public:
+  IgnoreSigPipe()
+  {
+    ::signal(SIGPIPE, SIG_IGN);
+  }
+};
+
+IgnoreSigPipe initObj;
 
 EventLoop::EventLoop()
     : looping_(false),

@@ -25,7 +25,7 @@ namespace net
 /// |                   |                  |                  |
 /// 0      <=      readerIndex   <=   writerIndex    <=     size
 /// @endcode
-class Buffer : copyable  //why public inhiret?
+class Buffer : public copyable  //why public inhiret?
 {
  public:
   static const size_t kCheapPrepend = 8;

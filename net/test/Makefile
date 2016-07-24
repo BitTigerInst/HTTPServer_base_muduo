@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-I../../../ -std=c++11 -Wall
-LD=-lpthread -g -lboost_unit_test_framework
+LD=-lpthread -g 
 
 BASE_BOJS=$(wildcard ../../base/*.o)
 OBJS=$(wildcard ../*.o)

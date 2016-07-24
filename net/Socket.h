@@ -51,6 +51,11 @@ class Socket : noncopyable
 
   void shutdownWrite();
 
+  ///
+  /// Enable/disable TCP_NODELAY (disable/enable Nagle's algorithm).
+  ///
+  void setTcpNoDelay(bool on);
+
 
  private:
   int sockfd_;

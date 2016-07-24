@@ -9,6 +9,13 @@
 #include <muduo/net/Socket.h>
 
 #include <memory>
+/**
+
+  TODO:
+  - higer water mark call back
+  - implicit_cast
+
+ */
 
 namespace muduo {
 namespace net {
@@ -40,6 +47,7 @@ class TcpConnection : noncopyable,
   void send(const std::string& message);
   // Thread safe.
   void shutdown();
+  void setTcpNoDelay(bool on);
 
   // cannot use rvalue
   void setConnectionCallback(const ConnectionCallback& cb) {
@@ -47,6 +55,9 @@ class TcpConnection : noncopyable,
   }
 
   void setMessageCallback(const MessageCallback& cb) { messageCallback_ = cb; }
+
+  void setWriteCompleteCallback(const WriteCompleteCallback& cb)
+  { writeCompleteCallback_ = cb; }
 
   /// Internal use only.
   void setCloseCallback(const CloseCallback& cb) { closeCallback_ = cb; }
@@ -84,6 +95,8 @@ class TcpConnection : noncopyable,
   InetAddress peerAddr_;
   ConnectionCallback connectionCallback_;
   MessageCallback messageCallback_;
+  WriteCompleteCallback writeCompleteCallback_;
+
   CloseCallback closeCallback_;
 
   Buffer inputBuffer_;

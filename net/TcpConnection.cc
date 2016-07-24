@@ -49,7 +49,7 @@ void TcpConnection::send(const std::string& message)
     } else {
       //bind will copy the string,  ref avoid copy, but  thread safe???
       loop_->runInLoop(
-          std::bind(&TcpConnection::sendInLoop, this, std::ref(message)));
+          std::bind(&TcpConnection::sendInLoop, this, message));
     }
   }
 }
@@ -64,6 +64,9 @@ void TcpConnection::sendInLoop(const std::string& message)
     if (nwrote >= 0) {
       if (implicit_cast<size_t>(nwrote) < message.size()) {
         LOG_TRACE << "I am going to write more data";
+      }else if(writeCompleteCallback_){
+        loop_->queueInLoop(
+          std::bind(writeCompleteCallback_,shared_from_this()));
       }
     } else {
       nwrote = 0;
@@ -103,6 +106,10 @@ void TcpConnection::shutdownInLoop()
   }
 }
 
+void TcpConnection::setTcpNoDelay(bool on)
+{
+  socket_.setTcpNoDelay(on);
+}
 
 
 void TcpConnection::connectEstablished() {
@@ -153,6 +160,11 @@ void TcpConnection::handleWrite()
       outputBuffer_.retrieve(n);
       if (outputBuffer_.readableBytes() == 0) {
         channel_->disableWriting();
+
+        if(writeCompleteCallback_){
+          loop_->queueInLoop(std::bind(writeCompleteCallback_,shared_from_this()));
+        }
+
         if (state_ == kDisconnecting) {
           shutdownInLoop();
         }
