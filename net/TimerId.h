@@ -2,6 +2,7 @@
 #define MUDUO_NET_TIMER_ID_H
 
 #include <muduo/base/copyable.h>
+#include <memory>
 
 namespace muduo {
 namespace net {
