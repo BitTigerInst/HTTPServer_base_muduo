@@ -7,6 +7,7 @@
 #include <muduo/net/Callbacks.h>
 #include <muduo/net/InetAddress.h>
 #include <muduo/net/Socket.h>
+#include <muduo/http/HttpContext.h>
 
 #include <memory>
 /**
@@ -48,6 +49,17 @@ class TcpConnection : noncopyable,
   // Thread safe.
   void shutdown();
   void setTcpNoDelay(bool on);
+
+
+  void setContext(const HttpContext& context)
+  { context_ = context; }
+
+  const HttpContext& getContext() const
+  { return context_; }
+
+  HttpContext* getMutableContext()
+  { return &context_; }
+
 
   // cannot use rvalue
   void setConnectionCallback(const ConnectionCallback& cb) {
@@ -101,6 +113,8 @@ class TcpConnection : noncopyable,
 
   Buffer inputBuffer_;
   Buffer outputBuffer_;
+
+  HttpContext context_;
 };
 
 typedef std::shared_ptr<TcpConnection> TcpConnectionPtr;

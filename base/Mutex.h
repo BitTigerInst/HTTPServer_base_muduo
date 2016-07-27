@@ -96,7 +96,7 @@ class MutexLock : noncopyable
  private:
   friend class Condition;
 
-  class UnassignGuard : boost::noncopyable
+  class UnassignGuard : noncopyable
   {
    public:
     UnassignGuard(MutexLock& owner)
@@ -134,7 +134,7 @@ class MutexLock : noncopyable
 //   MutexLockGuard lock(mutex_);
 //   return data_.size();
 // }
-class MutexLockGuard : boost::noncopyable
+class MutexLockGuard : noncopyable
 {
  public:
   explicit MutexLockGuard(MutexLock& mutex)

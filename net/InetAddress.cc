@@ -51,3 +51,17 @@ std::string InetAddress::toHostPort() const
   return buf;
 }
 
+
+std::string InetAddress::toIpPort() const
+{
+  char buf[64] = "";
+  sockets::toIpPort(buf, sizeof buf, getSockAddrInet());
+  return buf;
+}
+
+std::string InetAddress::toIp() const
+{
+  char buf[64] = "";
+  sockets::toIp(buf, sizeof buf, getSockAddrInet());
+  return buf;
+}

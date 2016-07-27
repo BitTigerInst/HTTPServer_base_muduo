@@ -51,8 +51,16 @@ int createNonblockingOrDie();
 void bindOrDie(int sockfd, const struct sockaddr_in& addr);
 void listenOrDie(int sockfd);
 int  accept(int sockfd, struct sockaddr_in* addr);
+ssize_t read(int sockfd, void *buf, size_t count);
+ssize_t readv(int sockfd, const struct iovec *iov, int iovcnt);
 void close(int sockfd);
 void shutdownWrite(int sockfd);
+
+void toIpPort(char* buf, size_t size,
+              const struct sockaddr_in& addr);
+void toIp(char* buf, size_t size,
+          const struct sockaddr_in& addr);
+
 
 void toHostPort(char* buf, size_t size,
                 const struct sockaddr_in& addr);

@@ -1,19 +1,22 @@
 
 #include <muduo/net/Buffer.h>
+
 #include <muduo/net/SocketsOps.h>
-#include <muduo/base/Logging.h>
 
 #include <errno.h>
-#include <memory.h>
 #include <sys/uio.h>
 
 using namespace muduo;
 using namespace muduo::net;
 
+const char Buffer::kCRLF[] = "\r\n";
 
-//user stack space
+const size_t Buffer::kCheapPrepend;
+const size_t Buffer::kInitialSize;
+
 ssize_t Buffer::readFd(int fd, int* savedErrno)
 {
+  // saved an ioctl()/FIONREAD call to tell how much to read
   char extrabuf[65536];
   struct iovec vec[2];
   const size_t writable = writableBytes();
@@ -21,15 +24,27 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
   vec[0].iov_len = writable;
   vec[1].iov_base = extrabuf;
   vec[1].iov_len = sizeof extrabuf;
-  const ssize_t n = readv(fd, vec, 2);
-  if (n < 0) {
+  // when there is enough space in this buffer, don't read into extrabuf.
+  // when extrabuf is used, we read 128k-1 bytes at most.
+  const int iovcnt = (writable < sizeof extrabuf) ? 2 : 1;
+  const ssize_t n = sockets::readv(fd, vec, iovcnt);
+  if (n < 0)
+  {
     *savedErrno = errno;
-  } else if (implicit_cast<size_t>(n) <= writable) {
+  }
+  else if (implicit_cast<size_t>(n) <= writable)
+  {
     writerIndex_ += n;
-  } else {
+  }
+  else
+  {
     writerIndex_ = buffer_.size();
     append(extrabuf, n - writable);
   }
+  // if (n == writable + sizeof extrabuf)
+  // {
+  //   goto line_30;
+  // }
   return n;
 }
 

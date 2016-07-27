@@ -24,8 +24,15 @@ class TcpServer : noncopyable
 {
  public:
 
-  TcpServer(EventLoop* loop, const InetAddress& listenAddr);
+  TcpServer(EventLoop* loop, 
+    const InetAddress& listenAddr,
+    const std::string& nameArg);
   ~TcpServer();  // force out-line dtor, for scoped_ptr members.
+
+
+  const std::string& ipPort() const { return ipPort_; }
+  const std::string& name() const { return name_; }
+  EventLoop* getLoop() const { return loop_; }
 
   /// Set the number of threads for handling input.
   ///
@@ -74,6 +81,7 @@ class TcpServer : noncopyable
   typedef std::map<std::string, TcpConnectionPtr> ConnectionMap;
 
   EventLoop* loop_;  // the acceptor loop
+  const std::string ipPort_;
   const std::string name_;
   const std::unique_ptr<Acceptor> acceptor_; // avoid revealing Acceptor
   const std::unique_ptr<EventLoopThreadPool> threadPool_;

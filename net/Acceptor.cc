@@ -45,4 +45,9 @@ void Acceptor::handleRead()
       newConnectionCallback_(std::move(sockfd), peerAddr);
     } 
   }
+  else
+  {
+    LOG_SYSERR << "in Acceptor::handleRead";
+    
+  }
 }

@@ -15,9 +15,12 @@ using namespace muduo;
 using namespace muduo::net;
 using namespace std::placeholders;
 
-TcpServer::TcpServer(EventLoop* loop, const InetAddress& listenAddr)
+TcpServer::TcpServer(EventLoop* loop, 
+      const InetAddress& listenAddr,
+      const std::string& nameArg)
   : loop_(CHECK_NOTNULL(loop)),
-    name_(listenAddr.toHostPort()),
+    ipPort_(listenAddr.toIpPort()),
+    name_(nameArg),
     acceptor_(new Acceptor(loop, listenAddr)),
     threadPool_(new EventLoopThreadPool(loop)),
     started_(false),
