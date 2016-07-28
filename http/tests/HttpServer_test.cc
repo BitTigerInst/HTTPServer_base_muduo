@@ -1,6 +1,6 @@
-#include <muduo/net/http/HttpServer.h>
-#include <muduo/net/http/HttpRequest.h>
-#include <muduo/net/http/HttpResponse.h>
+#include <muduo/http/HttpServer.h>
+#include <muduo/http/HttpRequest.h>
+#include <muduo/http/HttpResponse.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
 

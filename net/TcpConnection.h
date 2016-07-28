@@ -1,7 +1,8 @@
 
 #ifndef MUDUO_NET_TCPCONNECTION_H
 #define MUDUO_NET_TCPCONNECTION_H
-
+#include <muduo/base/Types.h>
+#include <muduo/base/StringPiece.h>
 #include <muduo/base/noncopyable.h>
 #include <muduo/net/Buffer.h>
 #include <muduo/net/Callbacks.h>
@@ -10,13 +11,6 @@
 #include <muduo/http/HttpContext.h>
 
 #include <memory>
-/**
-
-  TODO:
-  - higer water mark call back
-  - implicit_cast
-
- */
 
 namespace muduo {
 namespace net {
@@ -33,20 +27,21 @@ class TcpConnection : noncopyable,
   /// Constructs a TcpConnection with a connected sockfd
   ///
   /// User should not create this object.
-  TcpConnection(EventLoop* loop, const std::string& name, Socket&& sockfd,
+  TcpConnection(EventLoop* loop, const string& name, Socket&& sockfd,
                 const InetAddress& localAddr, const InetAddress& peerAddr);
   ~TcpConnection();
 
   EventLoop* getLoop() const { return loop_; }
-  const std::string& name() const { return name_; }
+  const string& name() const { return name_; }
   const InetAddress& localAddress() { return localAddr_; }
   const InetAddress& peerAddress() { return peerAddr_; }
   bool connected() const { return state_ == kConnected; }
 
-  // void send(const void* message, size_t len);
-  // Thread safe.
-  void send(const std::string& message);
-  // Thread safe.
+  // void send(string&& message); // C++11
+  void send(const void* message, int len);
+  void send(const StringPiece& message);
+  // void send(Buffer&& message); // C++11
+  void send(Buffer* message);  // this one will swap data
   void shutdown();
   void setTcpNoDelay(bool on);
 
@@ -93,11 +88,13 @@ class TcpConnection : noncopyable,
   void handleWrite();
   void handleClose();
   void handleError();
-  void sendInLoop(const std::string& message);
+  // void sendInLoop(string&& message);
+  void sendInLoop(const StringPiece& message);
+  void sendInLoop(const void* message, size_t len);
   void shutdownInLoop();
 
   EventLoop* loop_;
-  std::string name_;
+  string name_;
   StateE state_;  // FIXME: use atomic variable
   // we don't expose those classes to client.
   // std::unique_ptr<Socket> socket_;

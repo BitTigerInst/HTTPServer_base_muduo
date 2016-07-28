@@ -6,14 +6,14 @@
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/SocketsOps.h>
 
+
 #include <errno.h>
 #include <stdio.h>
 
 using namespace muduo;
 using namespace muduo::net;
 using namespace std::placeholders;
-
-TcpConnection::TcpConnection(EventLoop* loop, const std::string& nameArg,
+TcpConnection::TcpConnection(EventLoop* loop, const string& nameArg,
                              Socket&& sockfd, const InetAddress& localAddr,
                              const InetAddress& peerAddr)
     : loop_(CHECK_NOTNULL(loop)),
@@ -41,49 +41,111 @@ TcpConnection::~TcpConnection() {
 }
 
 
-void TcpConnection::send(const std::string& message)
+
+void TcpConnection::send(const void* data, int len)
 {
-  if (state_ == kConnected) {
-    if (loop_->isInLoopThread()) {
+  send(StringPiece(static_cast<const char*>(data), len));
+}
+
+void TcpConnection::send(const StringPiece& message)
+{
+  if (state_ == kConnected)
+  {
+    if (loop_->isInLoopThread())
+    {
       sendInLoop(message);
-    } else {
-      //bind will copy the string,  ref avoid copy, but  thread safe???
+    }
+    else
+    {
       loop_->runInLoop(
-          std::bind(&TcpConnection::sendInLoop, this, message));
+          std::bind(
+            static_cast<void(TcpConnection::*)(const StringPiece&)>
+            (&TcpConnection::sendInLoop),
+                      this,     // FIXME   
+                      message.as_string()));//will copy
+                    //std::forward<string>(message)));
+    }
+  }
+}
+// FIXME efficiency!!!
+void TcpConnection::send(Buffer* buf)
+{
+  if (state_ == kConnected)
+  {
+    if (loop_->isInLoopThread())
+    {
+      sendInLoop(buf->peek(), buf->readableBytes());
+      buf->retrieveAll();
+    }
+    else
+    {
+      loop_->runInLoop(
+          std::bind(
+             static_cast<void(TcpConnection::*)(const StringPiece&)>
+                      (&TcpConnection::sendInLoop),
+                      this,     // FIXME
+                      buf->retrieveAllAsString()));
+                    //std::forward<string>(message)));
     }
   }
 }
 
-void TcpConnection::sendInLoop(const std::string& message)
+void TcpConnection::sendInLoop(const StringPiece& message)
+{
+  sendInLoop(message.data(), message.size());
+}
+void TcpConnection::sendInLoop(const void* data, size_t len)
 {
   loop_->assertInLoopThread();
   ssize_t nwrote = 0;
+  size_t remaining = len;
+  bool faultError = false;
+  if (state_ == kDisconnected)
+  {
+    LOG_WARN << "disconnected, give up writing";
+    return;
+  }
   // if no thing in output queue, try writing directly
   if (!channel_->isWriting() && outputBuffer_.readableBytes() == 0) {
-    nwrote = ::write(channel_->fd(), message.data(), message.size());
+    nwrote = ::write(channel_->fd(), data, len);
     if (nwrote >= 0) {
-      if (implicit_cast<size_t>(nwrote) < message.size()) {
-        LOG_TRACE << "I am going to write more data";
-      }else if(writeCompleteCallback_){
+      remaining = len - nwrote;
+      if(remaining == 0 && writeCompleteCallback_)
+      {
         loop_->queueInLoop(
           std::bind(writeCompleteCallback_,shared_from_this()));
+      }
+      else
+      {
+        LOG_TRACE << "I am going to write more data";
       }
     } else {
       nwrote = 0;
       if (errno != EWOULDBLOCK) {
         LOG_SYSERR << "TcpConnection::sendInLoop";
+        if (errno == EPIPE || errno == ECONNRESET) // FIXME: any others?
+        {
+          faultError = true;
+        }
       }
     }
   }
-
-  assert(nwrote >= 0);
-  if (implicit_cast<size_t>(nwrote) < message.size()) {
-    outputBuffer_.append(message.data()+nwrote, message.size()-nwrote);
+  /**
+  
+    TODO:
+    - highter water callback!!
+   */
+  assert(remaining <= len);
+  if (!faultError && remaining > 0) {
+    outputBuffer_.append(static_cast<const char*>(data)+nwrote, remaining);
     if (!channel_->isWriting()) {
       channel_->enableWriting();
     }
   }
+
 }
+
+
 
 void TcpConnection::shutdown()
 {

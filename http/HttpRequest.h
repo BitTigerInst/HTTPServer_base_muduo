@@ -1,6 +1,6 @@
 
-#ifndef MUDUO_NET_HTTP_HTTPREQUEST_H
-#define MUDUO_NET_HTTP_HTTPREQUEST_H
+#ifndef MUDUO_HTTP_HTTPREQUEST_H
+#define MUDUO_HTTP_HTTPREQUEST_H
 
 #include <muduo/base/copyable.h>
 #include <muduo/base/Timestamp.h>
@@ -175,4 +175,4 @@ class HttpRequest : public copyable
 }
 }
 
-#endif  // MUDUO_NET_HTTP_HTTPREQUEST_H
+#endif  // MUDUO_HTTP_HTTPREQUEST_H
