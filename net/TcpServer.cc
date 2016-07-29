@@ -100,6 +100,9 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
            << "] - connection " << conn->name();
   size_t n = connections_.erase(conn->name());
   assert(n == 1); (void)n;
+
+
+  //Channel->handleEvent   life cyle problems!!!
   EventLoop* ioLoop = conn->getLoop();
   ioLoop->queueInLoop(
       std::bind(&TcpConnection::connectDestroyed, conn));

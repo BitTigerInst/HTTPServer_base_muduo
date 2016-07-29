@@ -5,6 +5,8 @@
 #include <muduo/base/copyable.h>
 
 #include <muduo/http/HttpRequest.h>
+#include <list>
+#include <memory>
 
 namespace muduo
 {
@@ -12,6 +14,11 @@ namespace net
 {
 
 class Buffer;
+class TcpConnection;
+
+typedef std::weak_ptr<TcpConnection> WeakTcpConnectionPtr;
+typedef std::list<WeakTcpConnectionPtr> WeakConnectionList;
+typedef WeakConnectionList::iterator Index;
 
 class HttpContext : public copyable
 {
@@ -50,11 +57,35 @@ class HttpContext : public copyable
   HttpRequest& request()
   { return request_; }
 
+  Timestamp& getLastReceiveTime()
+  { return lastReceiveTime_; }
+
+  const Timestamp& getLastReceiveTime()const
+  { return lastReceiveTime_; }
+
+  Index& getPosition()
+  { return position_; }
+
+  const Index& getPosition()const
+  { return position_; }
+
+
+  void setLastReceiveTime(Timestamp receiveTime)
+  { lastReceiveTime_ = receiveTime; }
+
+  void setPostion(Index index)
+  { position_ = index; }
+
  private:
   bool processRequestLine(const char* begin, const char* end);
 
   HttpRequestParseState state_;
   HttpRequest request_;
+
+  //member to kick out idle connection
+  Timestamp lastReceiveTime_;
+  Index position_;
+  
 };
 
 }

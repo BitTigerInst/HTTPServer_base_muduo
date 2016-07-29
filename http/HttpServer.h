@@ -3,6 +3,8 @@
 
 #include <muduo/net/TcpServer.h>
 #include <muduo/base/noncopyable.h>
+#include <muduo/net/EventLoop.h>
+#include <muduo/http/HttpContext.h>
 
 namespace muduo
 {
@@ -38,6 +40,10 @@ class HttpServer : noncopyable
     server_.setThreadNum(numThreads);
   }
 
+  /// Check expire connection and kick out
+  void onCheckTimer();
+  void dumpConnectionList() const;
+
   void start();
 
  private:
@@ -49,6 +55,9 @@ class HttpServer : noncopyable
 
   TcpServer server_;
   HttpCallback httpCallback_;
+
+  const int time_out;
+  WeakConnectionList connectionList_;
 };
 
 }

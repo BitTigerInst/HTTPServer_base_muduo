@@ -4,6 +4,18 @@
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
 
+/**
+
+  TODO:
+  - static Content
+  - php-
+  - http://blog.sina.com.cn/s/blog_4d8cf3140101pa8c.html
+  - http://www.cnblogs.com/skynet/p/4173450.html
+  - 
+
+ */
+
+
 #include <iostream>
 #include <map>
 
@@ -18,8 +30,8 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
   std::cout << "Headers " << req.methodString() << " " << req.path() << std::endl;
   if (!benchmark)
   {
-    const std::map<string, string>& headers = req.headers();
-    for (std::map<string, string>::const_iterator it = headers.begin();
+    const std::map<std::string, std::string>& headers = req.headers();
+    for (std::map<std::string, std::string>::const_iterator it = headers.begin();
          it != headers.end();
          ++it)
     {
@@ -33,7 +45,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
     resp->setStatusMessage("OK");
     resp->setContentType("text/html");
     resp->addHeader("Server", "Muduo");
-    string now = Timestamp::now().toFormattedString();
+    std::string now = Timestamp::now().toFormattedString();
     resp->setBody("<html><head><title>This is title</title></head>"
         "<body><h1>Hello</h1>Now is " + now +
         "</body></html>");
@@ -43,7 +55,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
     resp->setStatusCode(HttpResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("image/png");
-    resp->setBody(string(favicon, sizeof favicon));
+    resp->setBody(std::string(favicon, sizeof favicon));
   }
   else if (req.path() == "/hello")
   {
@@ -70,6 +82,7 @@ int main(int argc, char* argv[])
     Logger::setLogLevel(Logger::WARN);
     numThreads = atoi(argv[1]);
   }
+  Logger::setLogLevel(Logger::DEBUG);
   EventLoop loop;
   HttpServer server(&loop, InetAddress(8000), "dummy");
   server.setHttpCallback(onRequest);

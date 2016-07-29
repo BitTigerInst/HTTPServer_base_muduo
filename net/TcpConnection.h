@@ -43,6 +43,10 @@ class TcpConnection : noncopyable,
   // void send(Buffer&& message); // C++11
   void send(Buffer* message);  // this one will swap data
   void shutdown();
+  ///active close
+  void forceClose();
+  void forceCloseWithDelay(double seconds);
+
   void setTcpNoDelay(bool on);
 
 
@@ -82,7 +86,7 @@ class TcpConnection : noncopyable,
     kDisconnecting,
     kDisconnected,
   };
-
+  void forceCloseInLoop();
   void setState(StateE s) { state_ = s; }
   void handleRead(Timestamp receiveTime);
   void handleWrite();

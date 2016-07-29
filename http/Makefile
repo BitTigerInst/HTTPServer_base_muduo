@@ -1,12 +1,12 @@
-CC=g++
-CFLAGS=-I../../ -std=c++11 -Wall
-LD=-lpthread -g
+include ../common.mk
+
+INCLUDE=-I../../
 OBJS=$(patsubst %.cc,%.o,$(wildcard *.cc))
 
 all: $(OBJS)
 
 %.o: %.cc 
-	$(CC) $(CFLAGS) $(LD) -c $<
+	$(CC) $(CFLAGS) $(INCLUDE) $(LD) -c $<
 
 clean:
 	rm -rf *.o

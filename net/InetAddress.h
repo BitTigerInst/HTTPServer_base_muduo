@@ -41,7 +41,7 @@ class InetAddress : copyable
   std::string toHostPort() const;
 
   // default copy/assignment are Okay
-  
+
   const struct sockaddr_in& getSockAddrInet() const { return addr_; }
   void setSockAddrInet(const struct sockaddr_in& addr) { addr_ = addr; }
 

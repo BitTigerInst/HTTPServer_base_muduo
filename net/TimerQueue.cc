@@ -143,7 +143,7 @@ void TimerQueue::addTimerInLoop(TimerPtr timer)
 
 void TimerQueue::handleRead()
 {
-
+  LOG_DEBUG << "TimerQueue::handleRead()" ;
   loop_->assertInLoopThread();
   Timestamp now(Timestamp::now());
   readTimerfd(timerfd_, now);
@@ -226,7 +226,7 @@ bool TimerQueue::insert(TimerPtr timer)
 	}
 	std::pair<TimerList::iterator,bool> result = 
 			timers_.insert(std::make_pair(when,timer));
-	assert(result.second);
+	assert(result.second);(void)result;
 	return earliestChanged;
 }
 

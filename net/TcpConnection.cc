@@ -2,6 +2,7 @@
 #include <muduo/net/TcpConnection.h>
 
 #include <muduo/base/Logging.h>
+#include <muduo/base/WeakCallback.h>
 #include <muduo/net/Channel.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/SocketsOps.h>
@@ -203,6 +204,8 @@ void TcpConnection::handleRead(Timestamp receiveTime)
   if (n > 0) {
     messageCallback_(shared_from_this(), &inputBuffer_, receiveTime);
   } else if (n == 0) {
+
+    LOG_DEBUG << "ADD:: read 0 and close connection";
     handleClose();
   } else {
     errno = savedErrno;
@@ -249,6 +252,7 @@ void TcpConnection::handleClose() {
   // we don't close fd, leave it to dtor, so we can find leaks easily.
   channel_->disableAll();
   // must be the last line
+  // will callconnecitonCallback ???
   closeCallback_(shared_from_this());
 }
 
@@ -256,4 +260,37 @@ void TcpConnection::handleError() {
   int err = sockets::getSocketError(channel_->fd());
   LOG_ERROR << "TcpConnection::handleError [" << name_
             << "] - SO_ERROR = " << err << " " << strerror_tl(err);
+}
+
+
+void TcpConnection::forceClose()
+{
+  // FIXME: use compare and swap
+  if (state_ == kConnected || state_ == kDisconnecting)
+  {
+    setState(kDisconnecting);
+    loop_->queueInLoop(std::bind(&TcpConnection::forceCloseInLoop, shared_from_this()));
+  }
+}
+
+void TcpConnection::forceCloseWithDelay(double seconds)
+{
+  if (state_ == kConnected || state_ == kDisconnecting)
+  {
+    setState(kDisconnecting);
+    loop_->runAfter(
+        seconds,
+        makeWeakCallback(shared_from_this(),
+                         &TcpConnection::forceClose));  // not forceCloseInLoop to avoid race condition
+  }
+}
+
+void TcpConnection::forceCloseInLoop()
+{
+  loop_->assertInLoopThread();
+  if (state_ == kConnected || state_ == kDisconnecting)
+  {
+    // as if we received 0 byte in handleRead();
+    handleClose();
+  }
 }
