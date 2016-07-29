@@ -42,7 +42,7 @@ HttpServer::HttpServer(EventLoop* loop,
   server_.setMessageCallback(
       std::bind(&HttpServer::onMessage, this, _1, _2, _3));
   loop->runEvery(1.5,std::bind(&HttpServer::onCheckTimer,this));
-#ifdef NDEBUG
+#ifdef CONNRM
   dumpConnectionList();
 #endif
 }
@@ -75,7 +75,7 @@ void HttpServer::onConnection(const TcpConnectionPtr& conn)
     connectionList_.erase(context.getPosition());
   }
 
-#ifdef NDEBUG
+#ifdef CONNRM
   dumpConnectionList();
 #endif
 }
@@ -89,7 +89,7 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn,
   context->setLastReceiveTime(receiveTime);
   connectionList_.splice(connectionList_.end(),connectionList_,context->getPosition());
   assert(context->getPosition() == --connectionList_.end());
-#ifdef NDEBUG
+#ifdef CONNRM
   dumpConnectionList();
 #endif
 
@@ -124,7 +124,7 @@ void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& req)
 
 void HttpServer::onCheckTimer()
 {
-#ifdef NDEBUG
+#ifdef CONNRM
   dumpConnectionList();
 #endif
   Timestamp now = Timestamp::now();
