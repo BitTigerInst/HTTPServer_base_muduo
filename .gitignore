@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 core
 *.d
 
+=======
+>>>>>>> d91cfe2c5b919455ccf37b91e5f673a60803489f
 # Compiled Object files
 *.slo
 *.lo
@@ -29,4 +32,8 @@ core
 # Executables
 *.exe
 *.out
+<<<<<<< HEAD
 
+=======
+*.app
+>>>>>>> d91cfe2c5b919455ccf37b91e5f673a60803489f
