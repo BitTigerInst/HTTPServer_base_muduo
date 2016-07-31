@@ -4,7 +4,10 @@
 
 #include <muduo/base/copyable.h>
 #include <muduo/base/Types.h>
-
+#include <unistd.h>
+#include <muduo/base/StringPiece.h>
+#include <vector>
+#include <assert.h>
 #include <map>
 
 namespace muduo
@@ -23,6 +26,7 @@ class HttpResponse : public copyable
     k301MovedPermanently = 301,
     k400BadRequest = 400,
     k404NotFound = 404,
+    k403Forbidden = 403
   };
 
   explicit HttpResponse(bool close)
@@ -50,9 +54,24 @@ class HttpResponse : public copyable
   void addHeader(const string& key, const string& value)
   { headers_[key] = value; }
 
-  void setBody(const string& body)
-  { body_ = body; }
+  void setBody(const StringPiece& size)
+  { setBody(body_.data(),body_.size());}
 
+  void setBody(const char* data,size_t len)
+  {
+    body_.resize(len);
+    std::copy(data,data+len,body_.data());
+  }
+
+  void setBodyFromfile(int srcfd,size_t size)
+  {
+    body_.resize(size);
+    //ssize_t pread(int fd, void *buf, size_t count, off_t offset)
+    ssize_t rc = ::pread(srcfd,body_.data(),size,0);
+    assert(static_cast<size_t>(rc) == size);(void)rc;
+  }
+
+  
   void appendToBuffer(Buffer* output) const;
 
  private:
@@ -61,7 +80,7 @@ class HttpResponse : public copyable
   // FIXME: add http version
   string statusMessage_;
   bool closeConnection_;
-  string body_;
+  std::vector<char> body_;
 };
 
 }

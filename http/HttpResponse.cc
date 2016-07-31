@@ -45,5 +45,5 @@ void HttpResponse::appendToBuffer(Buffer* output) const
   }
 
   output->append("\r\n");
-  output->append(body_);
+  output->append(body_.data(),body_.size());
 }
