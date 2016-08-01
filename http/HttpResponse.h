@@ -54,8 +54,10 @@ class HttpResponse : public copyable
   void addHeader(const string& key, const string& value)
   { headers_[key] = value; }
 
-  void setBody(const StringPiece& size)
-  { setBody(body_.data(),body_.size());}
+  void setBody(const StringPiece& data)
+  {
+    setBody(data.data(),data.size());
+  }
 
   void setBody(const char* data,size_t len)
   {
@@ -63,12 +65,9 @@ class HttpResponse : public copyable
     std::copy(data,data+len,body_.data());
   }
 
-  void setBodyFromfile(int srcfd,size_t size)
+  void setBody(std::vector<char>&& content)
   {
-    body_.resize(size);
-    //ssize_t pread(int fd, void *buf, size_t count, off_t offset)
-    ssize_t rc = ::pread(srcfd,body_.data(),size,0);
-    assert(static_cast<size_t>(rc) == size);(void)rc;
+    body_ = std::move(content);
   }
 
   

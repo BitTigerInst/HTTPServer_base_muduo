@@ -4,11 +4,12 @@
 class noncopyable
 {
  protected:
-  noncopyable() {}
+  noncopyable() = default;
+  ~noncopyable()= default;
 
  private:
   noncopyable(const noncopyable&) = delete;
-  noncopyable& operator=(const noncopyable&) = delete;
+  const noncopyable& operator=(const noncopyable&) = delete;
 };
 
 

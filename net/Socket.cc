@@ -19,7 +19,7 @@ using namespace muduo::net;
 
 Socket::~Socket()
 {
-  LOG_DEBUG << "close Socket " << sockfd_ ;
+  LOG_DEBUG << "close Socket :" << sockfd_ ;
   if(sockfd_!=-1){
     sockets::close(sockfd_);
   }
