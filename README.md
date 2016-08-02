@@ -9,7 +9,8 @@
 #### Feature:
   - C++11
   - non-blocking IO + IO multiplexing(Reactor)
-  - 多线程
+  - multithreading
+  - timer
 
 #### Target
 - 在muduo基础上，用c++11替换原有的boost组件，使用c++11新特性
