@@ -2,11 +2,21 @@
 # HTTPServer_base_muduo
 
 
-一个[muduo](https://github.com/chenshuo/muduo)的复制项目，用于学习和研究
+一个基于[muduo](https://github.com/chenshuo/muduo)的项目，用于学习和研究
 
 
 
-### httpserver base on muduo
+#### Feature:
+  - C++11
+  - non-blocking IO + IO multiplexing(Reactor)
+  - 多线程
+
+#### Target
+- 在muduo基础上，用c++11替换原有的boost组件，使用c++11新特性
+- 尝试添加epoll ET模式
+- 增加HTTP的功能，用php-fpm支持php
+
 #### TODO:
-- static files
-- CGI 
+- php-fpm
+- epoll
+- send files
