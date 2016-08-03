@@ -78,6 +78,7 @@ void TcpServer::newConnection(Socket&& sockfd, const InetAddress& peerAddr)
   //   new TcpConnection(loop_, connName, std::move(sockfd), localAddr, peerAddr));
   TcpConnectionPtr conn = std::make_shared<TcpConnection>
             (ioLoop, connName, std::move(sockfd), localAddr, peerAddr);
+  
   connections_[connName] = conn;
   conn->setConnectionCallback(connectionCallback_);
   conn->setMessageCallback(messageCallback_);

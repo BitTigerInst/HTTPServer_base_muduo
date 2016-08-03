@@ -17,6 +17,7 @@
   - php-
   - http://blog.sina.com.cn/s/blog_4d8cf3140101pa8c.html
   - http://www.cnblogs.com/skynet/p/4173450.html
+  - https://github.com/jaykizhou/php-server/
   -
 
  */
@@ -24,7 +25,7 @@ using namespace muduo;
 using namespace muduo::net;
 
 const std::string WEB_PATH = "../web";
-const int NUM_THREAD = 1;
+const int NUM_THREAD = 5;
 bool benchmark = false;
 
 void get_filetype(const string& filename, string& filetype) {
@@ -87,6 +88,8 @@ void onRequest(const HttpRequest& req, HttpResponse* resp) {
          it != headers.end(); ++it) {
       std::cout << it->first << ": " << it->second << std::endl;
     }
+
+    std::cout << req.body() << std::endl;
   }
 
   if (req.path().find("cgi-bin") == std::string::npos) {  /// server_static
@@ -108,7 +111,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp) {
 }
 
 int main(int argc, char* argv[]) {
-  //Logger::setLogLevel(Logger::DEBUG);
+  Logger::setLogLevel(Logger::DEBUG);
   EventLoop loop;
   HttpServer server(&loop, InetAddress(8000), "muduo_http");
   server.setHttpCallback(onRequest);

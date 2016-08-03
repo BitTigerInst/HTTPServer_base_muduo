@@ -37,6 +37,8 @@ void Acceptor::handleRead()
   InetAddress peerAddr(0);
   //FIXME loop until no more
   int connfd = acceptSocket_.accept(&peerAddr);//accept
+
+  LOG_DEBUG << "Accept fd: " << connfd ;
   //accept three stratiges !!!!!
   //TODO:  use RAII Sockets
   if (connfd >= 0) {

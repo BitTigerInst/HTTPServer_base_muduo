@@ -2,6 +2,7 @@
 
 #include <muduo/net/Buffer.h>
 #include <muduo/http/HttpContext.h>
+#include <muduo/base/Logging.h>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -54,6 +55,9 @@ bool HttpContext::parseRequest(Buffer* buf, Timestamp receiveTime)
 {
   bool ok = true;
   bool hasMore = true;
+  int body_lenth;
+
+  //LOG_DEBUG << buf->retrieveAllAsString();
   while (hasMore)
   {
     if (state_ == kExpectRequestLine)
@@ -90,11 +94,21 @@ bool HttpContext::parseRequest(Buffer* buf, Timestamp receiveTime)
         }
         else
         {
-          // empty line, end of header
+          // empty line, end of header   cannot receive /r/n bug
           // FIXME:
-          state_ = kGotAll;
-          hasMore = false;
+          if(request_.getHeader("Content-Length").size() == 0)
+          {
+            state_ = kGotAll;
+            hasMore = false;
+          }
+          else
+          {
+            body_lenth = stoi(request_.getHeader("Content-Length"));
+            state_ = kExpectBody;
+          }
+
         }
+        //loop retrieve last \r\n  
         buf->retrieveUntil(crlf + 2);
       }
       else
@@ -104,7 +118,24 @@ bool HttpContext::parseRequest(Buffer* buf, Timestamp receiveTime)
     }
     else if (state_ == kExpectBody)
     {
-      // FIXME:
+      //FIXME: The Max body lenth
+      LOG_DEBUG << "buf->readableBytes(): " << buf->readableBytes();
+      LOG_DEBUG << "body_lenth: " << body_lenth;
+      /// if not quit for next more data
+      if(buf->readableBytes() >= static_cast<size_t>(body_lenth))//has /r/n before body
+      {
+         
+        //buf->retrieve(2);// /r/n
+        const char* begin = buf->peek(); 
+        const char* end = begin + static_cast<size_t>(body_lenth);
+        request_.setBody(begin,end);
+        state_ = kGotAll;
+        hasMore = false;
+      }
+      else
+      {
+        hasMore = false;
+      }
     }
   }
   return ok;

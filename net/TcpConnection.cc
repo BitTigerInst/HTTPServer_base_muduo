@@ -176,9 +176,12 @@ void TcpConnection::setTcpNoDelay(bool on)
 
 
 void TcpConnection::connectEstablished() {
+  LOG_DEBUG << "connectEstablished  fd:" << channel_->fd();
   loop_->assertInLoopThread();
   assert(state_ == kConnecting);
   setState(kConnected);
+
+  LOG_DEBUG << "connectEstablished  fd:" << channel_->fd();
   channel_->enableReading();
 
   connectionCallback_(shared_from_this());
