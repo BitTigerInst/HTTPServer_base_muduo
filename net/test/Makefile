@@ -1,6 +1,6 @@
-CC=g++
-CFLAGS=-I../../../ -std=c++11 -Wall
-LD=-lpthread -g 
+include ../../common.mk
+
+INCLUDE=-I../../../
 
 BASE_BOJS=$(wildcard ../../base/*.o)
 OBJS=$(wildcard ../*.o)
@@ -11,10 +11,10 @@ TARGET=$(patsubst %.cc,%,$(wildcard *.cc))
 all: $(TARGET)
 
 $(TARGET): % : %.o
-	$(CC) $(CFLAGS) -o $@ $<  $(OBJS) $(BASE_BOJS)  $(LD)
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $<  $(OBJS) $(BASE_BOJS)   $(LD)
 
 %.o: %.cc
-	$(CC) $(CFLAGS) -c $< $(LD)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< $(LD)
 
 clean:
 	rm -rf *.o

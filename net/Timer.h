@@ -4,6 +4,7 @@
 #include <muduo/base/Timestamp.h>
 #include <muduo/base/noncopyable.h>
 #include <muduo/net/Callbacks.h>
+#include <muduo/base/Atomic.h>
 
 namespace muduo {
 namespace net {
@@ -17,7 +18,8 @@ class Timer : noncopyable {
       : callback_(std::move(cb)),
         expiration_(when),
         interval_(interval),
-        repeat_(interval > 0.0) {}
+        repeat_(interval > 0.0)
+        {}
 
   void run() const { callback_(); }
 
@@ -32,6 +34,7 @@ class Timer : noncopyable {
   Timestamp expiration_;
   const double interval_;
   const bool repeat_;
+  
 };
 
 

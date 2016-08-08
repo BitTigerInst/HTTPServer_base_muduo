@@ -113,32 +113,27 @@ void TimerQueue::addTimerInLoop(TimerPtr timer)
 
 }
 
-// void TimerQueue::cancelInLoop(TimerId timerId)
-// {
-//   loop_->assertInLoopThread();
-//   assert(timers_.size() == activeTimers_.size());
-//   ActiveTimer timer(timerId.timer_, timerId.sequence_);
-//   ActiveTimerSet::iterator it = activeTimers_.find(timer);
-//   if (it != activeTimers_.end())
-//   {
-//     size_t n = timers_.erase(Entry(it->first->expiration(), it->first));
-//     assert(n == 1); (void)n;
-//     delete it->first; // FIXME: no delete please
-//     activeTimers_.erase(it);
-//   }
-//   else if (callingExpiredTimers_)
-//   {
-//     cancelingTimers_.insert(timer);
-//   }
-//   assert(timers_.size() == activeTimers_.size());
-// }
+void TimerQueue::cancelInLoop(TimerId timerId)
+{
+  loop_->assertInLoopThread();
+  TimerPtr canceltimer = timerId.value_.lock();
+  if(canceltimer)
+  {
+    size_t n = timers_.erase(Entry(canceltimer->expiration(), canceltimer));
+    assert(n == 1); (void)n;
+  }
+  else
+  {
+    LOG_DEBUG << "cancel expired timer" ;
+  }
+}
 
 
-// void TimerQueue::cancel(TimerId timerId)
-// {
-//   loop_->runInLoop(
-//       std::bind(&TimerQueue::cancelInLoop, this, timerId));
-// }
+void TimerQueue::cancel(TimerId timerId)
+{
+  loop_->runInLoop(
+      std::bind(&TimerQueue::cancelInLoop, this, timerId));
+}
 
 
 void TimerQueue::handleRead()

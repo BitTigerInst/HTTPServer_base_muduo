@@ -4,12 +4,48 @@
 		"selected_items":
 		[
 			[
+				"re",
+				"retrieveAllAsString"
+			],
+			[
+				"retrieveAll",
+				"retrieveAllAsString	(TcpConnection.cc)"
+			],
+			[
 				"LOG",
-				"LOG_WARN	(TcpConnection.cc)"
+				"LOG_DEBUG"
 			],
 			[
 				"LOg",
-				"LOG_DEBUG"
+				"LOG_DEBUG	(muduo_server.cc)"
+			],
+			[
+				"has",
+				"hasMore"
+			],
+			[
+				"szi",
+				"size_t	(Buffer.h)"
+			],
+			[
+				"static",
+				"static_cast	(Buffer.h)"
+			],
+			[
+				"reada",
+				"readableBytes	(TcpConnection.cc)"
+			],
+			[
+				"kExpe",
+				"kExpectBody"
+			],
+			[
+				"body",
+				"body_lenth"
+			],
+			[
+				"ge",
+				"getHeader	(HttpRequest.h)"
 			],
 			[
 				"receive",
@@ -30,10 +66,6 @@
 			[
 				"Read",
 				"ReadError	(StaticFile.h)"
-			],
-			[
-				"re",
-				"resp"
 			],
 			[
 				"sta",
@@ -134,10 +166,6 @@
 			[
 				"mem",
 				"memory	(TimerId.h)"
-			],
-			[
-				"static",
-				"static_cast"
 			],
 			[
 				"as",
@@ -486,172 +514,16 @@
 			[
 				"b",
 				"buf"
-			],
-			[
-				"is_",
-				"is_static	(do_task.c)"
-			],
-			[
-				"str",
-				"strcmp"
-			],
-			[
-				"MAX",
-				"MAXLINE	(do_task.c)"
-			],
-			[
-				"MAx",
-				"MAXBUF	(csapp.h)"
-			],
-			[
-				"reque",
-				"request_b"
-			],
-			[
-				"ev",
-				"event"
-			],
-			[
-				"request_",
-				"request_init"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "net/TcpServer.cc",
-			"settings":
-			{
-				"buffer_size": 2961,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpRequest.h",
-			"settings":
-			{
-				"buffer_size": 3209,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpResponse.h",
-			"settings":
-			{
-				"buffer_size": 1699,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/StaticFile.h",
-			"settings":
-			{
-				"buffer_size": 660,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "http/bin/muduo_server.cc",
 			"settings":
 			{
-				"buffer_size": 3342,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "base/WeakCallback.h",
-			"settings":
-			{
-				"buffer_size": 1694,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "net/TcpConnection.cc",
-			"settings":
-			{
-				"buffer_size": 7573,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpContext.h",
-			"settings":
-			{
-				"buffer_size": 1715,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "net/TimerQueue.cc",
-			"settings":
-			{
-				"buffer_size": 6049,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpServer.cc",
-			"settings":
-			{
-				"buffer_size": 4400,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "common.mk",
-			"settings":
-			{
-				"buffer_size": 83,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/bin/muduo_server",
-			"settings":
-			{
-				"buffer_size": 11313820,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/StaticFile.cc",
-			"settings":
-			{
-				"buffer_size": 1201,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "base/noncopyable.h",
-			"settings":
-			{
-				"buffer_size": 310,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpResponse.cc",
-			"settings":
-			{
-				"buffer_size": 1159,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "net/Buffer.h",
-			"settings":
-			{
-				"buffer_size": 8857,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "http/HttpContext.cc",
-			"settings":
-			{
-				"buffer_size": 2354,
+				"buffer_size": 3383,
 				"line_ending": "Unix"
 			}
 		}
@@ -738,7 +610,6 @@
 	"expanded_folders":
 	[
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web",
@@ -746,57 +617,63 @@
 	],
 	"file_history":
 	[
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpServer.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpServer.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThreadPool.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpConnection.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Acceptor.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpRequest.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Buffer.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Callbacks.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpResponse.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/StaticFile.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/tests/AsyncLogging_test.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/common.mk",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/StaticFile.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/noncopyable.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpResponse.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Socket.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/StringPiece.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Buffer.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/backup.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpRequest.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpServer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Buffer.cc",
 		"/home/xibaohe/test.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/tests/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/README.md",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpConnection.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpServer.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpConnection.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/common.mk",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpServer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/WeakCallback.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Timestamp.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerId.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThread.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThread.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test06.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThreadPool.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThreadPool.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test03.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test04.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Acceptor.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Acceptor.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpResponse.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Singleton.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test07",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Callbacks.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Mutex.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/tests/HttpServer_test.cc",
@@ -812,8 +689,6 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Socket.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test07.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Logging.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test05.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test08.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test08",
@@ -829,7 +704,6 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Date.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/noncopyable.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/noncopyable.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Eventloop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/tests/Makefile",
@@ -870,10 +744,7 @@
 		"/home/xibaohe/.config/sublime-text-3/Packages/User/CTags.sublime-settings",
 		"/home/xibaohe/.config/sublime-text-3/Packages/CTags/CTags.sublime-settings",
 		"/home/xibaohe/.config/sublime-text-3/Packages/EasyClangComplete/EasyClangComplete.sublime-settings",
-		"/home/xibaohe/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/xibaohe/csapp/Tiny/Tiny_process/src/fdbuf.c",
-		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_thread_pre.c",
-		"/home/xibaohe/csapp/Tiny/Tiny_process/include/fdbuf.h"
+		"/home/xibaohe/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
 	],
 	"find":
 	{
@@ -979,143 +850,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "net/TcpServer.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2961,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1403,
-								1403
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 60.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "http/HttpRequest.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3209,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								388,
-								388
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2520.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "http/HttpResponse.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1699,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1279,
-								1279
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 780.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "http/StaticFile.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 660,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								277,
-								277
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "http/bin/muduo_server.cc",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3342,
+						"buffer_size": 3383,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								724,
-								724
+								420,
+								420
 							]
 						],
 						"settings":
@@ -1129,360 +881,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "base/WeakCallback.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1694,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								340,
-								340
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "net/TcpConnection.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7573,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5249,
-								5249
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "http/HttpContext.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1715,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								921,
-								921
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 467.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "net/TimerQueue.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6049,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4270,
-								4270
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 2640.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "http/HttpServer.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3425,
-								3425
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 420.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "common.mk",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 83,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								64,
-								64
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
-						},
-						"translation.x": 36.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "http/bin/muduo_server",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11313820,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "http/StaticFile.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								728,
-								728
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "base/noncopyable.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 310,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								216,
-								216
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "http/HttpResponse.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1159,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1052,
-								1052
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 120.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "net/Buffer.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8857,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4067,
-								4067
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3106.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "http/HttpContext.cc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2354,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								678,
-								678
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
 					"type": "text"
 				}
 			]
@@ -1573,7 +971,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 201.0,
+	"side_bar_width": 62.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

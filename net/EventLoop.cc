@@ -125,10 +125,10 @@ TimerId EventLoop::runEvery(double interval, const TimerCallback&& cb) {
   return timerQueue_->addTimer(std::move(cb), time, interval);
 }
 
-// void EventLoop::cancel(TimerId timerId)
-// {
-//   return timerQueue_->cancel(timerId);
-// }
+void EventLoop::cancel(TimerId timerId)
+{
+  return timerQueue_->cancel(timerId);
+}
 
 void EventLoop::updateChannel(Channel* channel) {
   assert(channel->ownerLoop() == this);

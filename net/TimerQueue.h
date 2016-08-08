@@ -32,7 +32,8 @@ class TimerQueue : noncopyable {
   /// Must be thread safe. Usually be called from other threads.
   TimerId addTimer(const TimerCallback&& cb, Timestamp when, double interval);
 
-  //void cancel(TimerId timerId);
+  void cancel(TimerId timerId);
+
 
  private:
   //shared with TimerID
@@ -42,6 +43,8 @@ class TimerQueue : noncopyable {
   typedef std::set<Entry> TimerList;
 
   void addTimerInLoop(TimerPtr timer);
+
+  void cancelInLoop(TimerId timerId);
 
   // called when timerfd alarms
   void handleRead();

@@ -53,7 +53,11 @@ void server_static(HttpResponse* resp, const string& reqpath) {
     LOG_DEBUG << filename << "problem";
     resp->setStatusCode(HttpResponse::k404NotFound);
     resp->setStatusMessage("Not Found");
-    //resp->setCloseConnection(true);
+    resp->setContentType("text/html");
+    resp->addHeader("Server", "Muduo");
+    resp->setBody("<html><head><title>This is title</title></head>"
+        "<body><h1>404 Not Found</h1></html>");
+    resp->setCloseConnection(true);
     return;
   }
   if (file.getStatus() == StaticFile::Forbidden) {

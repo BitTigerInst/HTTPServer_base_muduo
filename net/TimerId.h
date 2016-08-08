@@ -9,18 +9,20 @@ namespace net {
 class Timer;
 //where to put the TimerPtr????
 typedef std::shared_ptr<Timer> TimerPtr;
+typedef std::weak_ptr<Timer> TimerWeakPtr;
 
 ///
 /// An opaque identifier, for canceling Timer.
 ///
 class TimerId : public copyable {
  public:
-  explicit TimerId(TimerPtr timer) : value_(timer) {}
+  TimerId(TimerPtr timer = NULL) : value_(timer) {}
 
   // default copy-ctor, dtor and assignment are okay
 
+ friend class TimerQueue;
  private:
-  TimerPtr value_;
+  TimerWeakPtr value_;
 };
 
 }  // net
