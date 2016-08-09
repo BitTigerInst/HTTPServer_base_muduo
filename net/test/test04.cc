@@ -42,9 +42,9 @@ int main()
   loop.runAfter(2.5, std::bind(print, "once2.5"));
   loop.runAfter(3.5, std::bind(print, "once3.5"));
   muduo::net::TimerId t = loop.runEvery(2, std::bind(print, "every2"));
-  //loop.runEvery(3, std::bind(print, "every3"));
+  loop.runEvery(3, std::bind(print, "every3"));
   loop.runAfter(10, std::bind(&muduo::net::EventLoop::cancel, &loop, t));
-  //toCancel = loop.runEvery(5, cancelSelf);
+  toCancel = loop.runEvery(2, cancelSelf);
 
   loop.loop();
   print("main loop exits");

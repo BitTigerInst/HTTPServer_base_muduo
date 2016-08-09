@@ -119,8 +119,18 @@ void TimerQueue::cancelInLoop(TimerId timerId)
   TimerPtr canceltimer = timerId.value_.lock();
   if(canceltimer)
   {
-    size_t n = timers_.erase(Entry(canceltimer->expiration(), canceltimer));
-    assert(n == 1); (void)n;
+    Entry timerEntry(canceltimer->expiration(),canceltimer);
+    TimerList::iterator it = timers_.find(timerEntry);
+    if(it != timers_.end())
+    {
+      size_t n = timers_.erase(Entry(canceltimer->expiration(), canceltimer));
+      assert(n == 1); (void)n;
+    }
+    else if(callingExpiredTimers_)
+    {
+      LOG_INFO << "self cancel!!!" ;
+      cancelingTimers_.insert(timerEntry);
+    }
   }
   else
   {
@@ -144,14 +154,15 @@ void TimerQueue::handleRead()
   readTimerfd(timerfd_, now);
 
   std::vector<Entry> expired = getExpired(now);
-
+  callingExpiredTimers_ = true;
+  cancelingTimers_.clear();
   // safe to callback outside critical section
   for (std::vector<Entry>::iterator it = expired.begin();
       it != expired.end(); ++it)
   {
     it->second->run();
   }
-
+  callingExpiredTimers_ =false;
   reset(expired, now);
 }
 
@@ -186,7 +197,7 @@ void TimerQueue::reset(const std::vector<Entry>& expired, Timestamp now)
   for (std::vector<Entry>::const_iterator it = expired.begin();
       it != expired.end(); ++it)
   {
-    if (it->second->repeat())
+    if (it->second->repeat() && cancelingTimers_.find(*it) == cancelingTimers_.end())
     {
       it->second->restart(now);
       insert(it->second);

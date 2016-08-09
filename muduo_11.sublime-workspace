@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"ex",
+				"expiration"
+			],
+			[
+				"can",
+				"canceltimer"
+			],
+			[
+				"share",
+				"shared_ptr	(Connector.h)"
+			],
+			[
+				"name",
+				"name	Namespace"
+			],
+			[
 				"re",
 				"retrieveAllAsString"
 			],
@@ -180,10 +196,6 @@
 				"listenning"
 			],
 			[
-				"name",
-				"namespace"
-			],
-			[
 				"Evn",
 				"EventLoopThreadPool"
 			],
@@ -194,10 +206,6 @@
 			[
 				"write",
 				"writeCompleteCallback_"
-			],
-			[
-				"share",
-				"shared_from_this"
 			],
 			[
 				"Time",
@@ -506,24 +514,16 @@
 			[
 				"sig",
 				"sigmask"
-			],
-			[
-				"parse",
-				"parse_request"
-			],
-			[
-				"b",
-				"buf"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "http/bin/muduo_server.cc",
+			"file": "net/test/test04.cc",
 			"settings":
 			{
-				"buffer_size": 3383,
+				"buffer_size": 1249,
 				"line_ending": "Unix"
 			}
 		}
@@ -610,33 +610,48 @@
 	"expanded_folders":
 	[
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net"
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test"
 	],
 	"file_history":
 	[
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerId.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test04.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/Makefile",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.cc",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Types.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Atomic.h",
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpServer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpServer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThreadPool.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpConnection.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Acceptor.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpRequest.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Buffer.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpContext.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Callbacks.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Channel.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/HttpResponse.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/StaticFile.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/tests/AsyncLogging_test.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/common.mk",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/StaticFile.cc",
@@ -647,7 +662,6 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/backup.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Buffer.cc",
 		"/home/xibaohe/test.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/tests/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/README.md",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpConnection.h",
@@ -655,27 +669,19 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Makefile",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Connector.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/WeakCallback.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Timestamp.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerId.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Poller.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThread.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThread.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test06.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoopThreadPool.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test03.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test04.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Acceptor.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Singleton.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test07",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Mutex.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/Makefile",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/tests/HttpServer_test.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/tests/HttpRequest_unittest.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test9.cc",
@@ -684,7 +690,6 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Endian.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/InetAddress.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/InetAddress.cc",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TcpServer.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Socket.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test07.cc",
@@ -696,13 +701,11 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Tcpconn2.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test06.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/CurrentThread.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Condition.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/ThreadPool.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test04",
 		"/home/xibaohe/.config/sublime-text-3/Packages/User/EasyClangComplete.sublime-settings",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Date.h",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/noncopyable.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Eventloop.cc",
@@ -742,13 +745,11 @@
 		"/home/xibaohe/csapp/Tiny/Tiny_process/src/tiny_select.c",
 		"/home/xibaohe/csapp/Tiny/test_client/test_client.c",
 		"/home/xibaohe/.config/sublime-text-3/Packages/User/CTags.sublime-settings",
-		"/home/xibaohe/.config/sublime-text-3/Packages/CTags/CTags.sublime-settings",
-		"/home/xibaohe/.config/sublime-text-3/Packages/EasyClangComplete/EasyClangComplete.sublime-settings",
-		"/home/xibaohe/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+		"/home/xibaohe/.config/sublime-text-3/Packages/CTags/CTags.sublime-settings"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 116.0
 	},
 	"find_in_files":
 	{
@@ -762,6 +763,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			" // EventLoop loop;\n  // g_loop = &loop;\n  // Thread t(threadFunc);\n  // t.start();\n  // t.join();",
+			"h",
+			"timerId_",
+			"void EventLoop::cancel(TimerId timerId)\n{\n  return timerQueue_->cancel(timerId);\n}",
 			"string",
 			"body",
 			"Body_",
@@ -855,19 +860,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "http/bin/muduo_server.cc",
+					"file": "net/test/test04.cc",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3383,
+						"buffer_size": 1249,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								420,
-								420
+								1203,
+								1203
 							]
 						],
 						"settings":
@@ -877,7 +882,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -971,7 +976,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 62.0,
+	"side_bar_width": 182.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

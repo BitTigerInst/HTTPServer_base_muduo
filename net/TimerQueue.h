@@ -41,6 +41,7 @@ class TimerQueue : noncopyable {
 
   typedef std::pair<Timestamp, TimerPtr> Entry;
   typedef std::set<Entry> TimerList;
+  typedef std::set<Entry> CancelTimerList;//used for cancel self;
 
   void addTimerInLoop(TimerPtr timer);
 
@@ -52,7 +53,6 @@ class TimerQueue : noncopyable {
   std::vector<Entry> getExpired(Timestamp now);
   void reset(const std::vector<Entry>& expired, Timestamp now);
 
-  //Timer*  unique_ptr by value
   bool insert(TimerPtr timer);
 
   EventLoop* loop_;
@@ -61,6 +61,10 @@ class TimerQueue : noncopyable {
   Channel timerfdChannel_;
   // Timer list sorted by expiration
   TimerList timers_;
+  //to cancel;
+  CancelTimerList cancelingTimers_;
+  bool callingExpiredTimers_;
+
 };
 
 
