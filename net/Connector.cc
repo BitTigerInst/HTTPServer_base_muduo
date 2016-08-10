@@ -4,6 +4,7 @@
 #include <muduo/net/Channel.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/SocketsOps.h>
+#include <muduo/net/Socket.h>
 
 #include <muduo/base/Logging.h>
 
@@ -161,11 +162,8 @@ void Connector::handleWrite()
       setState(kConnected);
       if (connect_)
       {
-        newConnectionCallback_(sockfd);
-      }
-      else
-      {
-        sockets::close(sockfd);
+        Socket fd(sockfd);//transter value
+        newConnectionCallback_(std::move(fd));
       }
     }
   }

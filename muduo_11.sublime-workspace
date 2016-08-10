@@ -4,20 +4,40 @@
 		"selected_items":
 		[
 			[
+				"Conne",
+				"Connetfd	(TcpClient.h)"
+			],
+			[
+				"name",
+				"namespace"
+			],
+			[
+				"canceling",
+				"cancelingTimers_"
+			],
+			[
+				"cal",
+				"callingExpiredTimers_"
+			],
+			[
+				"cancel",
+				"cancelTimers_"
+			],
+			[
+				"can",
+				"cancelSelf	(test04.cc)"
+			],
+			[
+				"Timer",
+				"TimerList"
+			],
+			[
 				"ex",
 				"expiration"
 			],
 			[
-				"can",
-				"canceltimer"
-			],
-			[
 				"share",
 				"shared_ptr	(Connector.h)"
-			],
-			[
-				"name",
-				"name	Namespace"
 			],
 			[
 				"re",
@@ -172,10 +192,6 @@
 				"context"
 			],
 			[
-				"Conne",
-				"ConnectionNode"
-			],
-			[
 				"Con",
 				"ConnectionNode"
 			],
@@ -298,10 +314,6 @@
 			[
 				"addTimer",
 				"addTimerInLoop"
-			],
-			[
-				"Timer",
-				"TimerQueue"
 			],
 			[
 				"ass",
@@ -502,18 +514,6 @@
 			[
 				"publi",
 				"public	(test.cpp)"
-			],
-			[
-				"err",
-				"errno"
-			],
-			[
-				"Epoll",
-				"Epoll_wait"
-			],
-			[
-				"sig",
-				"sigmask"
 			]
 		]
 	},
@@ -523,7 +523,95 @@
 			"file": "net/test/test04.cc",
 			"settings":
 			{
-				"buffer_size": 1249,
+				"buffer_size": 1245,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/test/test12.cc",
+			"settings":
+			{
+				"buffer_size": 509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Channel.h",
+			"settings":
+			{
+				"buffer_size": 2070,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/SocketsOps.h",
+			"settings":
+			{
+				"buffer_size": 1664,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TcpClient.h",
+			"settings":
+			{
+				"buffer_size": 1736,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TcpClient.cc",
+			"settings":
+			{
+				"buffer_size": 3545,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Connector.cc",
+			"settings":
+			{
+				"buffer_size": 4515,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Acceptor.cc",
+			"settings":
+			{
+				"buffer_size": 1291,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/Connector.h",
+			"settings":
+			{
+				"buffer_size": 1545,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TimerQueue.h",
+			"settings":
+			{
+				"buffer_size": 1622,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TimerQueue.cc",
+			"settings":
+			{
+				"buffer_size": 6133,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "net/TimerId.h",
+			"settings":
+			{
+				"buffer_size": 598,
 				"line_ending": "Unix"
 			}
 		}
@@ -610,14 +698,13 @@
 	"expanded_folders":
 	[
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test"
 	],
 	"file_history":
 	[
+		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/base/Thread.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/bin/muduo_server.cc",
@@ -630,7 +717,6 @@
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/TimerQueue.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test04.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/Makefile",
-		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/test/test_EventLoop.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/Timer.cc",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.h",
 		"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/net/SocketsOps.cc",
@@ -763,6 +849,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"boost",
 			" // EventLoop loop;\n  // g_loop = &loop;\n  // Thread t(threadFunc);\n  // t.start();\n  // t.join();",
 			"h",
 			"timerId_",
@@ -855,7 +942,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -864,15 +951,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1249,
+						"buffer_size": 1245,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1203,
-								1203
+								544,
+								544
 							]
 						],
 						"settings":
@@ -882,10 +969,336 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 240.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "net/test/test12.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								509,
+								509
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "net/Channel.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								747,
+								747
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 819.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "net/SocketsOps.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1664,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1554,
+								1554
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1007.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "net/TcpClient.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								217,
+								217
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "net/TcpClient.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3247,
+								3247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "net/Connector.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								576,
+								576
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2640.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "net/Acceptor.cc",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1101,
+								1101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 480.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "net/Connector.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								584,
+								584
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 840.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "net/TimerQueue.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1544,
+								1544
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 600.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "net/TimerQueue.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5435,
+								5435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3558.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "net/TimerId.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 598,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								478,
+								478
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -976,7 +1389,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 182.0,
+	"side_bar_width": 247.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

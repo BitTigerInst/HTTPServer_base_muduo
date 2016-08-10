@@ -16,14 +16,14 @@ namespace net
 {
 
 
-
+class Socket;
 class Channel;
 class EventLoop;
 
 class Connector : noncopyable
 {
  public:
-  typedef std::function<void (int sockfd)> NewConnectionCallback;
+  typedef std::function<void (Socket&& Connetfd)> NewConnectionCallback;
 
   Connector(EventLoop* loop, const InetAddress& serverAddr);
   ~Connector();

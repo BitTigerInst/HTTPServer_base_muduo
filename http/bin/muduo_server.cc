@@ -26,6 +26,11 @@ using namespace muduo::net;
 
 const std::string WEB_PATH = "../web";
 const int NUM_THREAD = 5;
+const int EXPIRATION = 10;// idleconnetion expiration time by seconds 
+const string CGI_IP = "127.0.0.1";
+const int CGI_PORT = 9000;
+const int SERVER_PORT = 8000;
+
 bool benchmark = false;
 
 void get_filetype(const string& filename, string& filetype) {
@@ -40,10 +45,9 @@ void get_filetype(const string& filename, string& filetype) {
   else
     filetype = "text/plain";
 }
-/// ssize_t pread(int fd, void *buf, size_t count, off_t offset);
 void server_static(HttpResponse* resp, const string& reqpath) {
-  string filename = WEB_PATH + reqpath;
 
+  string filename = WEB_PATH + reqpath;
   
   StaticFile file(filename);
   file.openFile();
@@ -80,6 +84,17 @@ void server_static(HttpResponse* resp, const string& reqpath) {
   return;
 }
 
+void server_cgi(HttpResponse* resp, const string& reqpath) {
+  string filename = WEB_PATH + reqpath;
+  /* 
+    fc.startConnect();
+  fc.sendStartRequestRecord();
+  fc.sendParams("SCRIPT_FILENAME","/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
+  fc.sendParams("REQUEST_METHOD","GET");
+  fc.sendEndRequestRecord();
+   */
+
+}
 
 
 void onRequest(const HttpRequest& req, HttpResponse* resp) {
@@ -117,7 +132,9 @@ void onRequest(const HttpRequest& req, HttpResponse* resp) {
 int main(int argc, char* argv[]) {
   Logger::setLogLevel(Logger::DEBUG);
   EventLoop loop;
-  HttpServer server(&loop, InetAddress(8000), "muduo_http");
+
+  InetAddress cgiAddr(CGI_IP,CGI_PORT);
+  HttpServer server(&loop, InetAddress(SERVER_PORT), "muduo_http",EXPIRATION,cgiAddr);
   server.setHttpCallback(onRequest);
   server.setThreadNum(NUM_THREAD);
   server.start();

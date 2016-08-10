@@ -2,9 +2,11 @@
 #define MUDUO_NET_HTTP_HTTPSERVER_H
 
 #include <muduo/net/TcpServer.h>
+#include <muduo/net/TcpClient.h>
 #include <muduo/base/noncopyable.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/http/HttpContext.h>
+#include <muduo/http/FastCgi.h>
 
 namespace muduo
 {
@@ -23,7 +25,9 @@ class HttpServer : noncopyable
 
   HttpServer(EventLoop* loop,
              const InetAddress& listenAddr,
-             const std::string& name);
+             const std::string& name,
+              const int expiration,
+             const InetAddress& connectAddr);
 
   ~HttpServer();  // force out-line dtor, for scoped_ptr members.
 
@@ -53,11 +57,21 @@ class HttpServer : noncopyable
                  Timestamp receiveTime);
   void onRequest(const TcpConnectionPtr&, const HttpRequest&);
 
+  void onCGIConnection(const TcpConnectionPtr& conn);
+  void onCGIMessage(const TcpConnectionPtr& conn,
+                    Buffer* buf,Timestamp receiveTime);
+
   TcpServer server_;
   HttpCallback httpCallback_;
 
-  const int time_out;
+  //for kick out the idle connection
+  const int time_out;//expiration time
   WeakConnectionList connectionList_;
+
+  //for php fast-cgi support;
+  TcpClient client_;
+  TcpConnectionPtr CGIConn_;
+  cgi::FastCgi fcgi_;
 };
 
 }

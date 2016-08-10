@@ -15,11 +15,11 @@ void threadFunc()
 
 int main()
 {
-  // EventLoop loop;
-  // g_loop = &loop;
-  // Thread t(threadFunc);
-  // t.start();
-  // t.join();
+  EventLoop loop;
+  g_loop = &loop;
+  Thread t(threadFunc);
+  t.start();
+  t.join();
 }
 
 
