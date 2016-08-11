@@ -6,6 +6,7 @@
 #include <muduo/http/HttpRequest.h>
 #include <muduo/http/HttpResponse.h>
 #include <functional>
+#include <vector>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -59,11 +60,17 @@ void HttpServer::onCGIConnection(const TcpConnectionPtr& conn) {
              << "] from " << conn->peerAddress().toHostPort().c_str();
 
     Buffer buffer;
-    
     fcgi_.StartRequestRecord(&buffer);
-    //fcgi_.Params(&buffer,"SCRIPT_FILENAME","/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
-    //fcgi_.Params(&buffer,"REQUEST_METHOD","GET");
-    fcgi_.EndRequestRecord(&buffer);
+    // std::vector<string> name;
+    // std::vector<string> value;
+    // name.push_back("SCRIPT_FILENAME");
+    // name.push_back("REQUEST_METHOD");
+    // value.push_back("/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
+    // value.push_back("GET");
+    //fcgi_.Params(&buffer,,"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
+    //fcgi_.Params(&buffer,,"GET");
+    //fcgi_.Params(&buffer,name,value);
+    //fcgi_.EndRequestRecord(&buffer);
     CGIConn_ = conn;
     conn->send(&buffer);
   } else {
@@ -77,7 +84,11 @@ void HttpServer::onCGIMessage(const TcpConnectionPtr& conn, Buffer* buf,
             << " bytes from connection [" << conn->name().c_str() << "] at"
             << receiveTime.toFormattedString().c_str();
 
-  LOG_DEBUG << "onMessage(): " << buf->retrieveAllAsString().c_str();
+  while(buf->readableBytes() >= FCGI_HEADER_LEN)
+  {
+    string content = fcgi_.ParseFromPhp(buf);
+    LOG_DEBUG << content ;
+  }
   //std::string message = "Hello\n";
   //conn->send(message);
 }

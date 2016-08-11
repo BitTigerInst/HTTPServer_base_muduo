@@ -2,10 +2,10 @@
 
 #include <muduo/http/FastCgi.h>
 #include <muduo/net/Buffer.h>
+#include <muduo/base/Logging.h>
 
 using namespace muduo;
 using namespace muduo::net;
-using namespace muduo::net::cgi;
 
 const int FastCgi::PARAMS_BUFF_LEN = 1024 ;
 const int FastCgi::CONTENT_BUFF_LEN = 1024 ;
@@ -103,7 +103,7 @@ void FastCgi::StartRequestRecord(Buffer *buffer) {
   buffer->append(reinterpret_cast<char *>(&beginRecord), sizeof beginRecord);
 }
 
-void FastCgi::Params(Buffer *buffer, string name, string value) {
+void FastCgi::Params(Buffer *buffer, string& name, string& value) {
   unsigned char bodyBuff[PARAMS_BUFF_LEN];
 
   bzero(bodyBuff, sizeof(bodyBuff));
@@ -111,7 +111,38 @@ void FastCgi::Params(Buffer *buffer, string name, string value) {
   int bodyLen;  //保存body的长度
 
   //生成PARAMS参数内容的body
-  makeNameValueBody(name, name.size(), value, value.size(), bodyBuff, &bodyLen);
+  makeNameValueBody(name, name.size(), value, value.size(), bodyBuff, &bodyLen);  
+
+  FCGI_Header nameValueHeader;
+  nameValueHeader = makeHeader(FCGI_PARAMS, requestId_, bodyLen, 0);
+
+  assert(sizeof nameValueHeader == FCGI_HEADER_LEN);
+  buffer->append(reinterpret_cast<char *>(&nameValueHeader), sizeof nameValueHeader);
+  buffer->append(reinterpret_cast<char *>(bodyBuff), bodyLen);
+}
+
+/**
+ * for the multiple name and value
+ */
+
+void FastCgi::Params(Buffer *buffer, std::vector<string>& name, std::vector<string>& value) {
+  unsigned char bodyBuff[PARAMS_BUFF_LEN];
+
+  bzero(bodyBuff, sizeof(bodyBuff));
+
+  int bodyLen = 0;  //保存body的长度
+
+  //生成PARAMS参数内容的body
+  assert(name.size() == value.size());
+  int len = name.size();
+  unsigned char* body = bodyBuff;
+  for(int i=0;i<len;i++)
+  {
+  	int Len = 0;
+  	makeNameValueBody(name[i], name[i].size(), value[i], value[i].size(), body, &Len);
+  	body += Len;
+  	bodyLen += Len;
+  }
 
   FCGI_Header nameValueHeader;
   nameValueHeader = makeHeader(FCGI_PARAMS, requestId_, bodyLen, 0);
@@ -131,3 +162,58 @@ void FastCgi::EndRequestRecord(Buffer* buffer)
 
     buffer->append(reinterpret_cast<char *>(&endHeader),sizeof endHeader);
 }
+
+string FastCgi::ParseFromPhp(Buffer* buffer)
+{
+	FCGI_Header responderHeader;
+    string content;
+    int contentLen;
+    
+    	
+	memcpy(&responderHeader,buffer->peek(),FCGI_HEADER_LEN);
+	buffer->retrieve(FCGI_HEADER_LEN);
+	if(responderHeader.type == FCGI_STDOUT)
+	{
+		contentLen = (responderHeader.contentLengthB1 << 8) + (responderHeader.contentLengthB0);
+		if(contentLen > CONTENT_BUFF_LEN)
+		{
+			LOG_ERROR << "received data from fcgi bigger than CONTENT_BUFF_LEN";
+		}
+		content.resize(contentLen);
+		copy(buffer->peek(),buffer->peek() + contentLen,content.begin());
+		buffer->retrieve(contentLen); 
+
+		if(responderHeader.paddingLength > 0)
+		{
+			buffer->retrieve(responderHeader.paddingLength);
+		}
+	}
+	else if (responderHeader.type == FCGI_STDERR)
+	{
+		contentLen = (responderHeader.contentLengthB1 << 8) + (responderHeader.contentLengthB0);
+		if(contentLen > CONTENT_BUFF_LEN)
+		{
+			LOG_ERROR << "received data from fcgi bigger than CONTENT_BUFF_LEN";
+		}
+		content.resize(contentLen);
+		copy(buffer->peek(),buffer->peek() + contentLen,content.begin());
+		buffer->retrieve(contentLen); 
+
+		if(responderHeader.paddingLength > 0)
+		{
+			buffer->retrieve(responderHeader.paddingLength);
+		}
+	}
+	else if(responderHeader.type == FCGI_END_REQUEST)
+	{
+		FCGI_EndRequestBody endRequest;
+
+		memcpy(&endRequest,buffer->peek(),sizeof endRequest);
+
+		buffer->retrieve(sizeof endRequest);
+	}
+
+	return content;
+}
+
+

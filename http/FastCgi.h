@@ -4,13 +4,13 @@
 #include <muduo/base/Types.h>
 #include <muduo/base/noncopyable.h>
 #include <muduo/http/FastCgiSpec.h>
+#include <vector>
 
 namespace muduo {
 namespace net {
 
 class Buffer;
 
-namespace cgi {
 /**
  * this class used for parse fastcgi
  * and pack data
@@ -25,9 +25,13 @@ class FastCgi : noncopyable {
 
   void StartRequestRecord(Buffer *buffer);
 
-  void Params(Buffer *buffer, string name, string value);
+  void Params(Buffer *buffer, string& name, string& value);
+
+  void Params(Buffer *buffer, std::vector<string>& name, std::vector<string>& value);
 
   void EndRequestRecord(Buffer *buffer);
+
+  string ParseFromPhp(Buffer* buffer);
 
  private:
   FCGI_Header makeHeader(int type, int request, int contentLength,
@@ -44,7 +48,6 @@ class FastCgi : noncopyable {
   static const int CONTENT_BUFF_LEN ;  //内容buffer的大小
 };
 
-}  // cgi
 }  // net
 }  // muduo
 

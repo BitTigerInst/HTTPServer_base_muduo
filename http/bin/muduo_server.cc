@@ -117,15 +117,15 @@ void onRequest(const HttpRequest& req, HttpResponse* resp) {
     server_static(resp,reqpath);
   } 
   else 
-  {  //
-    resp->setStatusCode(HttpResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("text/html");
-    resp->addHeader("Server", "Muduo");
-    std::string now = Timestamp::now().toFormattedString();
-    resp->setBody("<html><head><title>This is title</title></head>"
-        "<body><h1>still not support cgi-bin</h1>Now is " + now +
-        "</body></html>");
+  {  
+    // resp->setStatusCode(HttpResponse::k200Ok);
+    // resp->setStatusMessage("OK");
+    // resp->setContentType("text/html");
+    // resp->addHeader("Server", "Muduo");
+    // std::string now = Timestamp::now().toFormattedString();
+    // resp->setBody("<html><head><title>This is title</title></head>"
+    //     "<body><h1>still not support cgi-bin</h1>Now is " + now +
+    //     "</body></html>");
   }
 }
 

@@ -9,7 +9,6 @@
 
 namespace muduo {
 namespace net {
-namespace cgi {
 
 
 /*========================================
@@ -132,7 +131,6 @@ typedef struct
 /*=====  End of fastcgi specific  ======*/
 
 
-} // cgi
 } // net
 } // muduo
 

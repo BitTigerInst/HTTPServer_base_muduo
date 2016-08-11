@@ -71,7 +71,7 @@ class HttpServer : noncopyable
   //for php fast-cgi support;
   TcpClient client_;
   TcpConnectionPtr CGIConn_;
-  cgi::FastCgi fcgi_;
+  FastCgi fcgi_;
 };
 
 }
