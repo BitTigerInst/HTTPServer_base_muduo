@@ -163,12 +163,20 @@ void FastCgi::EndRequestRecord(Buffer* buffer)
     buffer->append(reinterpret_cast<char *>(&endHeader),sizeof endHeader);
 }
 
+int FastCgi::getRequestId(Buffer* buffer)
+{
+  FCGI_Header responderHeader;
+  int requestid;
+  memcpy(&responderHeader,buffer->peek(),FCGI_HEADER_LEN);
+  requestid = (responderHeader.requestIdB1 << 8) + (responderHeader.requestIdB0);
+  return requestid;
+}
+
 string FastCgi::ParseFromPhp(Buffer* buffer)
 {
 	FCGI_Header responderHeader;
-    string content;
-    int contentLen;
-    
+  string content;
+  int contentLen;
     	
 	memcpy(&responderHeader,buffer->peek(),FCGI_HEADER_LEN);
 	buffer->retrieve(FCGI_HEADER_LEN);

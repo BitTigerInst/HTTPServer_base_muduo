@@ -32,7 +32,8 @@ class HttpContext : public copyable
   };
 
   HttpContext()
-    : state_(kExpectRequestLine)
+    : state_(kExpectRequestLine),
+      cgiRequestId_(0)
   {
   }
 
@@ -76,6 +77,18 @@ class HttpContext : public copyable
   void setPostion(Index index)
   { position_ = index; }
 
+  void setCgiRequestId(int id)
+  { cgiRequestId_ = id; }
+
+  int getCgiRequestId() const
+  { return cgiRequestId_; }
+
+  void setClose(bool close)
+  { close_ = close ;}
+
+  bool getClose() const
+  { return close_; }
+
  private:
   bool processRequestLine(const char* begin, const char* end);
 
@@ -85,6 +98,11 @@ class HttpContext : public copyable
   //member to kick out idle connection
   Timestamp lastReceiveTime_;
   Index position_;
+
+  //the requesId for the fast-cgi
+  int cgiRequestId_; //0 represent no fastcgi
+
+  bool close_;
   
 };
 

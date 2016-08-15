@@ -7,6 +7,7 @@
 #include <muduo/http/HttpResponse.h>
 #include <functional>
 #include <vector>
+#include <muduo/base/Types.h>
 
 using namespace muduo;
 using namespace muduo::net;
@@ -24,17 +25,30 @@ void defaultHttpCallback(const HttpRequest&, HttpResponse* resp) {
 }
 }
 }
+/**
+
+  TODO:
+  - to move static file from muduo_server to here
+  - parse the content of php-fpm
+  - CGIconnetion re connect
+  - how to keep CGIconnetion alive?
+
+ */
+
+
+const string HttpServer::WEB_PATH = "/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web";
 
 HttpServer::HttpServer(EventLoop* loop, const InetAddress& listenAddr,
                        const std::string& name, const int expiration,const InetAddress& connectAddr)
     : server_(loop, listenAddr, name),
       httpCallback_(detail::defaultHttpCallback),
-      time_out(expiration),  // hard code there
-      client_(loop, connectAddr) {
+      time_out(expiration),  
+      client_(loop, connectAddr) 
+{
   server_.setConnectionCallback(std::bind(&HttpServer::onConnection, this, _1));
   server_.setMessageCallback(
       std::bind(&HttpServer::onMessage, this, _1, _2, _3));
-  //loop->runEvery(1.5, std::bind(&HttpServer::onCheckTimer, this));
+  loop->runEvery(1.5, std::bind(&HttpServer::onCheckTimer, this));
 #ifdef CONNRM
   dumpConnectionList();
 #endif
@@ -59,20 +73,22 @@ void HttpServer::onCGIConnection(const TcpConnectionPtr& conn) {
     LOG_INFO << "onConnection(): new connection [" << conn->name().c_str()
              << "] from " << conn->peerAddress().toHostPort().c_str();
 
+    ///to call some function open up the connection
+    ///the first package to keep the connection open!!!
+    FastCgi fcgi_;
     Buffer buffer;
     fcgi_.StartRequestRecord(&buffer);
-    // std::vector<string> name;
-    // std::vector<string> value;
-    // name.push_back("SCRIPT_FILENAME");
-    // name.push_back("REQUEST_METHOD");
-    // value.push_back("/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
-    // value.push_back("GET");
-    //fcgi_.Params(&buffer,,"/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
-    //fcgi_.Params(&buffer,,"GET");
-    //fcgi_.Params(&buffer,name,value);
-    //fcgi_.EndRequestRecord(&buffer);
+    std::vector<string> name;
+    std::vector<string> value;
+    name.push_back("SCRIPT_FILENAME");
+    name.push_back("REQUEST_METHOD");
+    value.push_back("/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
+    value.push_back("GET");
+   
+    fcgi_.Params(&buffer,name,value);
+    fcgi_.EndRequestRecord(&buffer);
     CGIConn_ = conn;
-    conn->send(&buffer);
+    conn->send(&buffer);   
   } else {
     LOG_ERROR << "onConnection(): connection [" << conn->name().c_str()
               << "] is down";
@@ -83,14 +99,38 @@ void HttpServer::onCGIMessage(const TcpConnectionPtr& conn, Buffer* buf,
   LOG_DEBUG << "onMessage(): received " << buf->readableBytes()
             << " bytes from connection [" << conn->name().c_str() << "] at"
             << receiveTime.toFormattedString().c_str();
-
+  FastCgi fcgi_;
   while(buf->readableBytes() >= FCGI_HEADER_LEN)
   {
+    int requestid = fcgi_.getRequestId(buf);
     string content = fcgi_.ParseFromPhp(buf);
-    LOG_DEBUG << content ;
+    if(requestid == 0)
+    {
+      LOG_DEBUG << content ;
+    }
+    else
+    {
+      TcpConnectionPtr conn = ReqCGIConnMap_[requestid].lock();
+      if(conn)
+      {
+        HttpContext context = conn->getContext();
+        HttpResponse response(context.getClose());
+        response.setBody(content);
+        response.setStatusCode(HttpResponse::k200Ok);
+        response.setStatusMessage("OK");
+        response.setContentType("text/html");
+        response.addHeader("Server", "Muduo");
+        Buffer buf;
+        response.appendToBuffer(&buf);
+        conn->send(&buf);
+      }
+      else
+      {//remove the invalid connection
+        ReqCGIConnMap_.erase(requestid);
+      }
+    }
+
   }
-  //std::string message = "Hello\n";
-  //conn->send(message);
 }
 
 void HttpServer::onConnection(const TcpConnectionPtr& conn) {
@@ -129,26 +169,74 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn, Buffer* buf,
   }
 
   if (context->gotAll()) {
-    onRequest(conn, context->request());
+    onRequest(conn, context->request(),context);
     context->reset();
   }
 }
 
 void HttpServer::onRequest(const TcpConnectionPtr& conn,
-                           const HttpRequest& req) {
+                           const HttpRequest& req,
+                           HttpContext* context) {
   const std::string& connection = req.getHeader("Connection");
   bool close =
       connection == "close" ||
       (req.getVersion() == HttpRequest::kHttp10 && connection != "Keep-Alive");
+  context->setClose(close);
   HttpResponse response(close);
-  httpCallback_(req, &response);
-  Buffer buf;
-  response.appendToBuffer(&buf);
-  conn->send(&buf);
+  if(req.path().find("cgi-bin") == std::string::npos)
+  {
+    httpCallback_(req, &response);
+    Buffer buf;
+    response.appendToBuffer(&buf);
+    conn->send(&buf);
+  }
+  else
+  {//to php-fpm
+    int reqid = context->getCgiRequestId();
+    EventLoop* mainLoop = getLoop();
+    //to send fastcgi in MainLoop;
+    mainLoop->runInLoop(std::bind(&HttpServer::server_cgi,this,req,reqid,conn));
+  }
+  
   if (response.closeConnection()) {
     conn->shutdown();
   }
 }
+void HttpServer::server_cgi(const HttpRequest& req,int reqid,const TcpConnectionPtr& conn)
+{
+    FastCgi fcgi_;
+    if(!reqid)
+    {// first request fast-cgi
+      reqid = ReqCGIId_.incrementAndGet();
+      ReqCGIConnMap_[reqid] = conn;/// store weak_ptr in map;
+    }
+    fcgi_.setRequestId(reqid);
+    string filename = WEB_PATH + req.path();
+
+    LOG_DEBUG << "the request php file is " << filename;
+
+
+    Buffer buffer;
+    fcgi_.StartRequestRecord(&buffer);
+
+    std::vector<string> name;
+    std::vector<string> value;
+    name.push_back("SCRIPT_FILENAME");
+    name.push_back("REQUEST_METHOD");
+    value.push_back(filename);
+    value.push_back(req.methodString());
+    fcgi_.Params(&buffer,name,value);
+    fcgi_.EndRequestRecord(&buffer);
+    if(CGIConn_->connected())
+    {
+      CGIConn_->send(&buffer);
+    }
+    else
+    {
+      LOG_DEBUG << "CGIConnection down!!!" ;
+    }
+}
+
 
 void HttpServer::onCheckTimer() {
 #ifdef CONNRM

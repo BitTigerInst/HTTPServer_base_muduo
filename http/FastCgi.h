@@ -23,6 +23,8 @@ class FastCgi : noncopyable {
 
   void setRequestId(int requestId) { requestId_ = requestId; }
 
+  int getRequestId(Buffer* buffer);
+
   void StartRequestRecord(Buffer *buffer);
 
   void Params(Buffer *buffer, string& name, string& value);

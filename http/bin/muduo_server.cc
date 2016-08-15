@@ -24,7 +24,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
-const std::string WEB_PATH = "../web";
+const std::string WEB_PATH = "/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web";
 const int NUM_THREAD = 5;
 const int EXPIRATION = 10;// idleconnetion expiration time by seconds 
 const string CGI_IP = "127.0.0.1";
@@ -84,17 +84,6 @@ void server_static(HttpResponse* resp, const string& reqpath) {
   return;
 }
 
-void server_cgi(HttpResponse* resp, const string& reqpath) {
-  string filename = WEB_PATH + reqpath;
-  /* 
-    fc.startConnect();
-  fc.sendStartRequestRecord();
-  fc.sendParams("SCRIPT_FILENAME","/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web/cgi-bin/info.php");
-  fc.sendParams("REQUEST_METHOD","GET");
-  fc.sendEndRequestRecord();
-   */
-
-}
 
 
 void onRequest(const HttpRequest& req, HttpResponse* resp) {
@@ -118,14 +107,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp) {
   } 
   else 
   {  
-    // resp->setStatusCode(HttpResponse::k200Ok);
-    // resp->setStatusMessage("OK");
-    // resp->setContentType("text/html");
-    // resp->addHeader("Server", "Muduo");
-    // std::string now = Timestamp::now().toFormattedString();
-    // resp->setBody("<html><head><title>This is title</title></head>"
-    //     "<body><h1>still not support cgi-bin</h1>Now is " + now +
-    //     "</body></html>");
+    LOG_ERROR << "cgi-bin should in HttpServer!!!" ;
   }
 }
 
