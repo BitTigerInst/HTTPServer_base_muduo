@@ -11,6 +11,7 @@
   - non-blocking IO + IO multiplexing(Reactor)
   - multithreading
   - timer
+  - php-fpm
 
 #### Target
 - 在muduo基础上，用c++11替换原有的boost组件，使用c++11新特性
@@ -18,7 +19,7 @@
 - 增加HTTP的功能，用php-fpm支持php
 
 #### TODO:
-- php-fpm
+- place connect with php-fpm to another thread
 - epoll
 - send files
 
