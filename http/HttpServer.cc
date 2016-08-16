@@ -29,9 +29,10 @@ void defaultHttpCallback(const HttpRequest&, HttpResponse* resp) {
 
   TODO:
   - to move static file from muduo_server to here
-  - parse the content of php-fpm
-  - CGIconnetion re connect
+  - POST parameters
+  - CGIconnetion re connect,  when CGIconnetion is down??
   - how to keep CGIconnetion alive?
+  - POST parameters
 
  */
 
@@ -48,7 +49,7 @@ HttpServer::HttpServer(EventLoop* loop, const InetAddress& listenAddr,
   server_.setConnectionCallback(std::bind(&HttpServer::onConnection, this, _1));
   server_.setMessageCallback(
       std::bind(&HttpServer::onMessage, this, _1, _2, _3));
-  loop->runEvery(1.5, std::bind(&HttpServer::onCheckTimer, this));
+  loop->runEvery(3, std::bind(&HttpServer::onCheckTimer, this));
 #ifdef CONNRM
   dumpConnectionList();
 #endif
@@ -103,34 +104,93 @@ void HttpServer::onCGIMessage(const TcpConnectionPtr& conn, Buffer* buf,
   while(buf->readableBytes() >= FCGI_HEADER_LEN)
   {
     int requestid = fcgi_.getRequestId(buf);
-    string content = fcgi_.ParseFromPhp(buf);
+    string cgi_message = fcgi_.ParseFromPhp(buf);
     if(requestid == 0)
     {
-      LOG_DEBUG << content ;
+      LOG_DEBUG << cgi_message ;
+      // //for test purpose
+      // if(cgi_message.size() > 0)
+      // { 
+      //   HttpContext context = conn->getContext();
+      //   HttpResponse response(context.getClose());
+      //   parseFromcgi(cgi_message,&response);
+      // }
     }
     else
     {
-      TcpConnectionPtr conn = ReqCGIConnMap_[requestid].lock();
-      if(conn)
+      if(cgi_message.size() > 0)
       {
-        HttpContext context = conn->getContext();
-        HttpResponse response(context.getClose());
-        response.setBody(content);
-        response.setStatusCode(HttpResponse::k200Ok);
-        response.setStatusMessage("OK");
-        response.setContentType("text/html");
-        response.addHeader("Server", "Muduo");
-        Buffer buf;
-        response.appendToBuffer(&buf);
-        conn->send(&buf);
-      }
-      else
-      {//remove the invalid connection
-        ReqCGIConnMap_.erase(requestid);
+        TcpConnectionPtr conn = ReqCGIConnMap_[requestid].lock();
+        if(conn)
+        {
+          HttpContext context = conn->getContext();
+          HttpResponse response(context.getClose());
+          parseFromcgi(cgi_message,&response);
+          Buffer buf;
+          response.appendToBuffer(&buf);
+          conn->send(&buf);
+        }
+        else
+        {//remove the invalid connection
+          ReqCGIConnMap_.erase(requestid);
+        }
       }
     }
-
   }
+}
+
+/*
+20160816 07:52:49.638187Z 15091 DEBUG onCGIMessage Content-type: text/html; charset=UTF-8
+
+<html>
+<body>
+hello</body>
+</html>
+ - HttpServer.cc:109
+20160816 08:13:20.565029Z 15631 DEBUG onCGIMessage Status: 404 Not Found
+Content-type: text/html; charset=UTF-8
+
+File not found.
+ - HttpServer.cc:109
+
+*/
+void HttpServer::parseFromcgi(const string& cgi_message,HttpResponse* resp)
+{
+  std::string::size_type n;
+  std::string::size_type l = 0;
+  bool error = false;
+  while((n = cgi_message.find("\r\n",l)) != std::string::npos)
+  {
+      std::string::size_type cl = cgi_message.find(':',l);
+      if(cl != std::string::npos)
+      {     
+        assert(l < cl && cl < n);
+        string name(cgi_message.begin()+l,cgi_message.begin()+cl);
+        string value(cgi_message.begin()+cl+2,cgi_message.begin()+n);
+        if(name == "Status" && value == "404 Not Found")
+        {
+          error = true;
+          resp->setStatusCode(HttpResponse::k404NotFound);
+          resp->setStatusMessage("Not Found");
+        }
+        resp->addHeader(name,value);
+        n+=2;
+        l = n;
+      }
+      else
+      {
+        break;
+      }
+  }
+  assert(n == l);
+  string content(cgi_message.begin()+n+2,cgi_message.end());
+  resp->setBody(content);
+  if(!error)
+  {
+    resp->setStatusCode(HttpResponse::k200Ok);
+    resp->setStatusMessage("OK");
+  }
+  resp->addHeader("Server", "Muduo");
 }
 
 void HttpServer::onConnection(const TcpConnectionPtr& conn) {

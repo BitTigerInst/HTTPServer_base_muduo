@@ -51,6 +51,8 @@ class HttpServer : noncopyable {
   void server_cgi(const HttpRequest& req, int reqid,
                   const TcpConnectionPtr& conn);
 
+  void parseFromcgi(const string& cgi_message,HttpResponse* resp);
+
   TcpServer server_;
   HttpCallback httpCallback_;
 

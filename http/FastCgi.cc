@@ -172,6 +172,12 @@ int FastCgi::getRequestId(Buffer* buffer)
   return requestid;
 }
 
+
+/**
+ * if type is STDERR or END_REQUEST
+ * then drop it content is empty!!!
+ */
+
 string FastCgi::ParseFromPhp(Buffer* buffer)
 {
 	FCGI_Header responderHeader;
@@ -182,6 +188,8 @@ string FastCgi::ParseFromPhp(Buffer* buffer)
 	buffer->retrieve(FCGI_HEADER_LEN);
 	if(responderHeader.type == FCGI_STDOUT)
 	{
+    LOG_DEBUG << "responderHeader.type == FCGI_STDOUT";
+
 		contentLen = (responderHeader.contentLengthB1 << 8) + (responderHeader.contentLengthB0);
 		if(contentLen > CONTENT_BUFF_LEN)
 		{
@@ -198,14 +206,17 @@ string FastCgi::ParseFromPhp(Buffer* buffer)
 	}
 	else if (responderHeader.type == FCGI_STDERR)
 	{
+    LOG_DEBUG << "responderHeader.type == FCGI_STDERR";
 		contentLen = (responderHeader.contentLengthB1 << 8) + (responderHeader.contentLengthB0);
 		if(contentLen > CONTENT_BUFF_LEN)
 		{
 			LOG_ERROR << "received data from fcgi bigger than CONTENT_BUFF_LEN";
 		}
-		content.resize(contentLen);
-		copy(buffer->peek(),buffer->peek() + contentLen,content.begin());
-		buffer->retrieve(contentLen); 
+
+		//content.resize(contentLen);
+    //copy(buffer->peek(),buffer->peek() + contentLen,content.begin());
+		
+    buffer->retrieve(contentLen); 
 
 		if(responderHeader.paddingLength > 0)
 		{
@@ -214,9 +225,10 @@ string FastCgi::ParseFromPhp(Buffer* buffer)
 	}
 	else if(responderHeader.type == FCGI_END_REQUEST)
 	{
+    LOG_DEBUG << "responderHeader.type == FCGI_END_REQUEST";
 		FCGI_EndRequestBody endRequest;
 
-		memcpy(&endRequest,buffer->peek(),sizeof endRequest);
+		//memcpy(&endRequest,buffer->peek(),sizeof endRequest);
 
 		buffer->retrieve(sizeof endRequest);
 	}

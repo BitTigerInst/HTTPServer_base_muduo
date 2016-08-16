@@ -26,7 +26,7 @@ using namespace muduo::net;
 
 const std::string WEB_PATH = "/home/xibaohe/ServerCode/chenshuo/muduo_11/muduo/http/web";
 const int NUM_THREAD = 5;
-const int EXPIRATION = 10;// idleconnetion expiration time by seconds 
+const int EXPIRATION = 5;// idleconnetion expiration time by seconds 
 const string CGI_IP = "127.0.0.1";
 const int CGI_PORT = 9000;
 const int SERVER_PORT = 8000;
